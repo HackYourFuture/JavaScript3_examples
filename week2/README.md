@@ -10,7 +10,7 @@ To exacerbate the response time of the requests, open the Chrome Developer Tools
 
 ## 00-base
 
-This folder show the unchanging part of the code by way of introduction. Pressing the button just produces a console.log.
+This folder shows the unchanging part of the code by way of introduction. Pressing the button just produces a console.log.
 
 ## 01-xhr-sync
 
