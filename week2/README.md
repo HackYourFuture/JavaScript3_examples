@@ -20,14 +20,14 @@ This folder demonstrates how a synchronous XMLHttpRequest makes the UI unrespons
 - The GO button remains highlighted.
 - The input field cannot be focussed, let alone typed in.
 
-## 02-xhr-async
+### 02-xhr-callback
 
-The asynchronous version remains responsive during the request.
+This version makes two asynchronous requests using callbacks. The second request depends on data from the first request.
 
-### 03-xhr-callback
+### 03-xhr-promise
 
-This version makes two requests to the Nobel Prize API using callbacks. The second request depends on data from the first request.
+The code from `02-xhr-callback` refactored to use promises.
 
-### 04-xhr-promise
+### 04-xhr-await
 
-The code from the previous example is now refactored to use promises.
+The code from `03-xhr-promise` refactored to use promises with async/await.
