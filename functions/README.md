@@ -1,4 +1,4 @@
-# Functions, callbacks, promise and async/await
+# Functions, callbacks, promises and async/await
 
 ## Why use functions?
 
@@ -286,10 +286,10 @@ Our `eatLunch()` and `main()` functions can now be rewritten as follows (`consol
 function eatLunch(cannedFood) {
   return openCan(cannedFood)
     .then(contents => {
-      return warmUp(contents)
-        .then(hotFood => {          console.log('Warmed up: ' + hotFood);
-          return eat(hotFood);
-        });
+      return warmUp(contents);
+    })
+    .then(hotFood => {
+      return eat(hotFood);
     });
 }
 

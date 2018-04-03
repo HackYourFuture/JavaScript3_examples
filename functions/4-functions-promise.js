@@ -38,11 +38,11 @@ function eatLunch(cannedFood) {
     .then(contents => {
       console.log('Opened can: ' + contents);
       console.log('Warming up: ' + contents);
-      return warmUp(contents)
-        .then(hotFood => {
-          console.log('Warmed up: ' + hotFood);
-          return eat(hotFood);
-        });
+      return warmUp(contents);
+    })
+    .then(hotFood => {
+      console.log('Warmed up: ' + hotFood);
+      return eat(hotFood);
     });
 }
 
