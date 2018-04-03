@@ -125,13 +125,13 @@ For the examples we will use accelerated time (seconds instead of minutes), othe
 
 We will use the standard `setTimeout()` function to time the various time dependent activities.
 
-We will also use two helper functions, notably `startTimer()` and `stopTimer()`, to show the elapsed time (in seconds) while we are waiting. These helper functions resides in a separate file (`timer.js`), so that they do not clutter up the code we want to focus on. To access them, we must use some syntax from Node (see below).  If you are unfamiliar with Node just take it for granted for now that this syntax makes the functions `startTimer()` and `stopTimer()` available for use in our code. 
+We will also use two helper functions, notably `startTimer()` and `stopTimer()`, to show the elapsed time (in seconds) while we are waiting. These helper functions reside in a separate file (`timer.js`), so that they do not clutter up the code we want to focus on. To access them, we must use some syntax from Node (see below).  If you are unfamiliar with Node just take it for granted for now that this syntax makes the functions `startTimer()` and `stopTimer()` available for use in our code. 
 
 ```js
 const { startTimer, stopTimer } = require('./timer');
 ```
 
-As our tasks take time now, we can no longer use a `return` statement to return the result of a task. We need to rewrite our functions to handle the asynchronous nature of the tasks. In version 2 of the example as described in this section we will use _callback_ functions to achieve this.
+As our tasks take time now, we can no longer use a `return` statement to return the result of a task. Instead, we need to rewrite our functions to handle the asynchronous nature of the tasks. In version 2 of the example as described in this section we will use _callback_ functions to achieve this.
 
 | Function | Description |
 | -------- | ----------- |
