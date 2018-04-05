@@ -34,7 +34,7 @@ Use the `live-coding` folder for all live coding.
 
 - Revisit (async) callbacks.
 
-### 10-xhr-base
+### 2-xhr-base
 
 - Explain what an API is.
 - [Todd Motto's Public APIs](https://github.com/toddmotto/public-apis)
@@ -48,33 +48,33 @@ Use the `live-coding` folder for all live coding.
 - Add a console.log to show the `readyState`.
 - Change the queryString to an unsupported value and demonstrate the error case.
 
-### 11-xhr-callback
+### 3-xhr-callback
 
-- Refactor code to create a reusable `fetchJSON` function taking a `url` and a callback as given in folder `11-xhr-callback`.
+- Refactor code to create a reusable `fetchJSON` function taking a `url` and a callback.
 
-### 12-xhr-render
+### 4-xhr-render
 
 - Render the data as a `pre` tag showing the JSON data
 
-### 13-xhr-html
+### 5-xhr-html
 
 - Show that HTML we want to create from the JSON data
 
-### 14-xhr-first
+### 6-xhr-first
 
 - First version of rudimentary HTML
 
-### 15-xhr-dry
+### 7-xhr-dry
 
 - Create a `createAndAppend` function: DRY.
 - Explain that functions allow us to abstract away details so we can concentrate on the task at hand.
 - Explain the benefits of reusability.
 
-### 16-xhr-dryer
+### 8-xhr-dryer
 
 - Demonstrate improved version of `createAndAppend`.
 
-### 99-final
+### 9-final
 
 This folder contains the finished version of the Nobel Prize SPA:
 

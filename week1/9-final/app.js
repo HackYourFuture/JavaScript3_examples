@@ -70,7 +70,7 @@
 
     fetchJSON(url, (error, data) => {
       if (error) {
-        console.log(error);
+        renderError(error);
         return;
       }
       if ('prizes' in data) {
@@ -131,6 +131,11 @@
     });
   }
 
+  function renderError(error) {
+    const listContainer = document.getElementById('list-container');
+    listContainer.innerHTML = `<div class="alert alert-error">${error.message}</div>`;
+  }
+
   function addRow(tbody, label, value) {
     const tr = createAndAppend('tr', tbody);
     createAndAppend('td', tr, { html: label + ':', class: 'label' });
@@ -160,7 +165,7 @@
         if (xhr.status < 400) {
           cb(null, xhr.response);
         } else {
-          cb(new Error(xhr.statusText));
+          cb(new Error(`Network error: ${xhr.status} - ${xhr.statusText}`));
         }
       }
     };

@@ -8,11 +8,11 @@ There are three examples in this repo. They all feature the same user interface:
 
 To exacerbate the response time of the requests, open the Chrome Developer Tools, select the Network tab and change the [Network Throttling](https://developers.google.com/web/tools/chrome-devtools/network-performance/reference#throttling) menu to 'Slow 3G'.
 
-## 00-base
+## 1-base
 
 This folder shows the unchanging part of the code by way of introduction. Pressing the button just produces a console.log.
 
-## 01-xhr-sync
+## 2-xhr-sync
 
 This folder demonstrates how a synchronous XMLHttpRequest makes the UI unresponsive while the XMLHttpRequest is pending.
 
@@ -20,14 +20,14 @@ This folder demonstrates how a synchronous XMLHttpRequest makes the UI unrespons
 - The GO button remains highlighted.
 - The input field cannot be focussed, let alone typed in.
 
-### 02-xhr-callback
+### 3-xhr-callback
 
 This version makes two asynchronous requests using callbacks. The second request depends on data from the first request.
 
-### 03-xhr-promise
+### 4-xhr-promise
 
 The code from `02-xhr-callback` refactored to use promises.
 
-### 04-xhr-await
+### 5-xhr-await
 
 The code from `03-xhr-promise` refactored to use promises with async/await.

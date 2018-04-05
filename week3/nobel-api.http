@@ -1,0 +1,19 @@
+### All female laureates
+
+GET http://api.nobelprize.org/v1/laureate.json?gender=female
+
+### All Dutch laureates
+
+GET http://api.nobelprize.org/v1/laureate.json?gender=female
+
+### Physicists working on quantum electrodynamics
+
+GET http://api.nobelprize.org/v1/laureate.json?motivation=quantum electrodynamics
+
+### Physics prizes 1900-1925
+
+GET http://api.nobelprize.org/v1/prize.json?year=1925&yearTo=25&category=physics
+
+### Nobel Prizes 2017
+
+GET http://api.nobelprize.org/v1/prize.json?year=2017
