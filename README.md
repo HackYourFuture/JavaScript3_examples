@@ -4,3 +4,4 @@
 - [Week 2](./week2/README.md)
 - [Week 3](./week3/README.md)
 - [functions](./functions/README.md)
+- [this, call, apply, bind, new](./this-call-bind/README.md)
