@@ -1,7 +1,7 @@
-// 'use strict';
+'use strict';
 
 function foo() {
   console.log(this);
 }
 
-foo();
+foo.call(window);

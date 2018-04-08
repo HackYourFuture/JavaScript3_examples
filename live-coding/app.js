@@ -1,3 +1,5 @@
+/* global BaseView, Prize, Laureate */
+/* eslint-disable no-unused-vars */
 'use strict';
 {
   const API = {
@@ -38,139 +40,88 @@
     ]
   };
 
-  function main() {
-    const root = document.getElementById('root');
-    createAndAppend('h1', root, { html: 'Nobel Prize Winners' });
-    const header = createAndAppend('div', root);
+  class App extends BaseView {
 
-    const select = createAndAppend('select', header, {
-      placeholder: 'Select a query'
-    });
-    API.queries.forEach(query => {
-      const url = query.endpoint !== ''
-        ? API.endpoints[query.endpoint] + query.queryString
-        : '';
-      createAndAppend('option', select, {
-        html: query.description,
-        value: url
+    start() {
+      const root = document.getElementById('root');
+      this.createAndAppend('h1', root, { html: 'Nobel Prize Winners' });
+      const header = this.createAndAppend('div', root);
+
+      const select = this.createAndAppend('select', header, {
+        placeholder: 'Select a query'
       });
-    });
-    select.addEventListener('change', e => onQueryChange(e.target.value));
+      API.queries.forEach(query => {
+        const url = query.endpoint !== ''
+          ? API.endpoints[query.endpoint] + query.queryString
+          : '';
+        this.createAndAppend('option', select, {
+          html: query.description,
+          value: url
+        });
+      });
+      select.addEventListener('change', e => this.onQueryChange(e.target.value));
 
-    createAndAppend('ul', root, { id: 'list-container' });
-
-  }
-
-  function onQueryChange(url) {
-    const listContainer = document.getElementById('list-container');
-    listContainer.innerHTML = '';
-    if (url === '') {
-      return;
+      this.createAndAppend('ul', root, { id: 'list-container' });
     }
 
-    fetchJSON(url, (error, data) => {
-      if (error) {
-        renderError(error);
-        return;
-      }
-      if ('prizes' in data) {
-        renderPrizes(data.prizes, listContainer);
-      } else if ('laureates' in data) {
-        renderLaureates(data.laureates, listContainer);
-      }
-    });
-  }
-
-  function renderPrizes(prizes, listContainer) {
-    prizes.forEach(prize => {
-      const div = createAndAppend('li', listContainer, {
-        class: 'list-item'
-      });
-      const table = createAndAppend('table', div);
-      const tbody = createAndAppend('tbody', table);
-      addRow(tbody, 'Year', prize.year);
-      addRow(tbody, 'Category', prize.category);
-
-      let ulString = '<ul>';
-      prize.laureates.forEach(laureate => {
-        ulString += `<li>${laureate.firstname} ${laureate.surname || ''}`;
-        if (laureate.motivation) {
-          ulString += `:</br><em>${laureate.motivation}</em>`;
+    async onQueryChange(url) {
+      try {
+        const listContainer = document.getElementById('list-container');
+        listContainer.innerHTML = '';
+        if (url === '') {
+          return;
         }
-        ulString += '</li>';
-      });
-      ulString += '</ul>';
 
-      addRow(tbody, 'Laureate(s)', ulString);
-    });
-  }
-
-  function renderLaureates(laureates, listContainer) {
-    laureates.forEach(laureate => {
-      const { surname, firstname } = laureate;
-      const div = createAndAppend('li', listContainer, {
-        class: 'list-item'
-      });
-      const table = createAndAppend('table', div);
-      const tbody = createAndAppend('tbody', table);
-      addRow(tbody, 'Name', `${firstname} ${surname || ''} `);
-      addRow(tbody, 'Born', laureate.born + '<br>' + laureate.bornCountry);
-      if (laureate.died !== '0000-00-00') {
-        addRow(tbody, 'Died', laureate.died + '<br>' + laureate.diedCountry);
-      }
-      let ulString = '<ul>';
-      laureate.prizes.forEach(prize => {
-        ulString += `<li>${prize.year}, ${prize.category}`;
-        if (prize.motivation) {
-          ulString += `:</br> <em>${prize.motivation}</em>`;
-        }
-        ulString += '</li>';
-      });
-      ulString += '</ul>';
-      addRow(tbody, 'Prize(s)', ulString);
-    });
-  }
-
-  function renderError(error) {
-    const listContainer = document.getElementById('list-container');
-    listContainer.innerHTML = `<div class="alert alert-error">${error.message}</div>`;
-  }
-
-  function addRow(tbody, label, value) {
-    const tr = createAndAppend('tr', tbody);
-    createAndAppend('td', tr, { html: label + ':', class: 'label' });
-    createAndAppend('td', tr, { html: value });
-  }
-
-  function createAndAppend(name, parent, options = {}) {
-    const elem = document.createElement(name);
-    parent.appendChild(elem);
-    Object.keys(options).forEach(key => {
-      const value = options[key];
-      if (key === 'html') {
-        elem.innerHTML = value;
-      } else {
-        elem.setAttribute(key, value);
-      }
-    });
-    return elem;
-  }
-
-  function fetchJSON(url, cb) {
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', url);
-    xhr.responseType = 'json';
-    xhr.onreadystatechange = () => {
-      if (xhr.readyState === 4) {
-        if (xhr.status < 400) {
-          cb(null, xhr.response);
-        } else {
-          cb(new Error(`Network error: ${xhr.status} - ${xhr.statusText}`));
+        const data = await this.fetchJSON(url);
+        if ('prizes' in data) {
+          this.renderPrizes(data.prizes, listContainer);
+        } else if ('laureates' in data) {
+          this.renderLaureates(data.laureates, listContainer);
         }
       }
-    };
-    xhr.send();
+      catch (error) {
+        this.renderError(error);
+      }
+    }
+
+    renderPrizes(prizes, listContainer) {
+      prizes
+        .map(prize => new Prize(prize, this))
+        .forEach(prize => prize.render(listContainer));
+    }
+
+    renderLaureates(laureates, listContainer) {
+      laureates
+        .map(laureate => new Laureate(laureate, this))
+        .forEach(laureate => laureate.render(listContainer));
+    }
+
+    renderError(error) {
+      const listContainer = document.getElementById('list-container');
+      listContainer.innerHTML = `<div class="alert alert-error">${error.message}</div>`;
+    }
+
+    fetchJSON(url) {
+      return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', url);
+        xhr.responseType = 'json';
+        xhr.onreadystatechange = () => {
+          if (xhr.readyState === 4) {
+            if (xhr.status < 400) {
+              resolve(xhr.response);
+            } else {
+              reject(new Error(`Network error: ${xhr.status} - ${xhr.statusText}`));
+            }
+          }
+        };
+        xhr.send();
+      });
+    }
   }
 
-  window.onload = main;
+  window.onload = () => {
+    const app = new App();
+    app.start();
+  };
 }

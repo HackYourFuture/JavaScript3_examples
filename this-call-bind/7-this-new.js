@@ -5,4 +5,5 @@ function Foo() {
 }
 
 const foo = Foo();
+
 const newFoo = new Foo();

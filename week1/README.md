@@ -9,7 +9,7 @@
 - Create a hyf-javascript3 repo on GitHub with .gitignore and README
 - Add .eslintrc file
 - Create week1, week2 and week3 folders
-- Create handson1 folder
+- Create handson1 folders
 
 ## Lecture
 
