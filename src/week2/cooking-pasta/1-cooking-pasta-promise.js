@@ -63,7 +63,6 @@ function main() {
     .then(cutTomatoes)
     .then(() => Promise.all([fryGarlic(), fryTomatoes(), heatWater()]))
     .then(() => Promise.all([mixSauce(), cookPasta()]))
-    .then(cookPasta)
     .then(servePasta)
     .then(() => {
       clearInterval(timerId);
