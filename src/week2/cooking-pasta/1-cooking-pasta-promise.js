@@ -53,6 +53,11 @@ function startIntervalTimer() {
   }, 995);
 }
 
+function processAll(processes) {
+  const promises = processes.map(process => process());
+  return Promise.all(promises);
+}
+
 function main() {
   const timerId = startIntervalTimer();
 
@@ -61,8 +66,8 @@ function main() {
   gatherIngredients()
     .then(cutGarlic)
     .then(cutTomatoes)
-    .then(() => Promise.all([fryGarlic(), fryTomatoes(), heatWater()]))
-    .then(() => Promise.all([mixSauce(), cookPasta()]))
+    .then(() => processAll([fryGarlic, fryTomatoes, heatWater]))
+    .then(() => processAll([mixSauce, cookPasta]))
     .then(servePasta)
     .then(() => {
       clearInterval(timerId);
