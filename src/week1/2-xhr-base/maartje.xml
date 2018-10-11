@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<maartjes-work>
+  <day name="monday">
+    <task duration="180">
+      Write a summary HTML/CSS
+    </task>
+    <task duration="120">
+      Some web development
+    </task>
+    <task duration="20">
+      Fix homework for class10
+    </task>
+    <task duration="200">
+      Talk to a lot of people
+    </task>
+  </day>
+  <day name="tuesday">
+    <task duration="240">
+      Keep writing summary
+    </task>
+    <task duration="180">
+      Some more web development
+    </task>
+    <task duration="10">
+      Staring out the window
+    </task>
+    <task duration="200">
+      Talk to a lot of people
+    </task>
+    <task duration="40">
+      Look at application assignments new students
+    </task>
+  </day>
+</maartjes-work>
