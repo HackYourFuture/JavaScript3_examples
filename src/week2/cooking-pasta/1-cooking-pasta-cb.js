@@ -1,6 +1,8 @@
 'use strict';
 
-const PROCESSING_TIME_MS = 8000;
+// https://github.com/HackYourFuture/teaching_tips_tricks#javascript-promises-learn-how-to-use-promises-by-cooking-pasta
+
+const PROCESSING_TIME_MS = 3000;
 
 function process(action, item, cb) {
   console.log(`${action} ${item}...`);
@@ -19,8 +21,8 @@ function cutGarlic(cb) {
   process('cut', 'garlic', cb);
 }
 
-function heatWater(cb) {
-  process('heat', 'water', cb);
+function boilWater(cb) {
+  process('boil', 'water', cb);
 }
 
 function cookPasta(cb) {
@@ -74,7 +76,7 @@ function main() {
   gatherIngredients(() => {
     cutGarlic(() => {
       cutTomatoes(() => {
-        processAll([fryGarlic, fryTomatoes, heatWater], () => {
+        processAll([fryGarlic, fryTomatoes, boilWater], () => {
           processAll([mixSauce, cookPasta], () => {
             servePasta(() => {
               clearInterval(timerId);

@@ -1,6 +1,8 @@
 'use strict';
 
-const PROCESSING_TIME_MS = 8000;
+// https://github.com/HackYourFuture/teaching_tips_tricks#javascript-promises-learn-how-to-use-promises-by-cooking-pasta
+
+const PROCESSING_TIME_MS = 3000;
 
 function process(action, item) {
   return new Promise(resolve => {
@@ -10,15 +12,14 @@ function process(action, item) {
 }
 
 const gatherIngredients = () => process('gather', 'ingredients');
-const cutTomatoes = () => process('cut', 'tomatoes');
 const cutGarlic = () => process('cut', 'garlic');
-const heatWater = () => process('heat', 'water');
+const cutTomatoes = () => process('cut', 'tomatoes');
+const boilWater = () => process('boil', 'water');
 const cookPasta = () => process('cook', 'pasta');
 const fryGarlic = () => process('fry', 'garlic');
 const fryTomatoes = () => process('fry', 'tomatoes');
 const mixSauce = () => process('mix', 'sauce');
 const servePasta = () => process('serve', 'pasta');
-const processAll = processes => Promise.all(processes.map(process => process()));
 
 function startIntervalTimer() {
   let elapsedSecs = 0;
@@ -28,7 +29,6 @@ function startIntervalTimer() {
   }, 995);
 }
 
-
 async function main() {
   const timerId = startIntervalTimer();
 
@@ -37,11 +37,11 @@ async function main() {
   await gatherIngredients();
   await cutGarlic();
   await cutTomatoes();
-  await processAll([fryGarlic, fryTomatoes, heatWater]);
-  await processAll([mixSauce, cookPasta]);
+  await Promise.all([fryGarlic(), fryTomatoes(), boilWater()]);
+  await Promise.all([mixSauce(), cookPasta()]);
   await servePasta();
-  clearInterval(timerId);
 
+  clearInterval(timerId);
   console.log('Enjoy this delicious pasta!');
 }
 
