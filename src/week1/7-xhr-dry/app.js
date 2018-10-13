@@ -35,9 +35,9 @@
       const tr = createAndAppend('tr', tbody);
       const td1 = createAndAppend('td', tr);
       td1.className = 'label';
-      td1.innerHTML = 'Name:';
+      td1.innerText = 'Name:';
       const td2 = createAndAppend('td', tr);
-      td2.innerHTML = laureate.firstname + ' ' + (laureate.surname || '');
+      td2.innerText = laureate.firstname + ' ' + (laureate.surname || '');
     });
   }
 

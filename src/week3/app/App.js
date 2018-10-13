@@ -5,7 +5,7 @@
 class App {
   start(endPoints) {
     const root = document.getElementById('root');
-    Util.createAndAppend('h1', root, { html: 'Nobel Prize Winners' });
+    Util.createAndAppend('h1', root, { text: 'Nobel Prize Winners' });
     const header = Util.createAndAppend('div', root);
 
     const select = Util.createAndAppend('select', header, {
@@ -13,7 +13,7 @@ class App {
     });
     endPoints.forEach((endPoint) => {
       Util.createAndAppend('option', select, {
-        html: endPoint.description,
+        text: endPoint.description,
         value: endPoint.url
       });
     });
@@ -22,9 +22,15 @@ class App {
     Util.createAndAppend('ul', root, { id: 'list-container' });
   }
 
+  clearContainer(container) {
+    while (container.firstChild) {
+      container.removeChild(container.firstChild);
+    }
+  }
+
   async onSelectionChange(url) {
     const listContainer = document.getElementById('list-container');
-    listContainer.innerHTML = '';
+    this.clearContainer(listContainer);
     if (url === '') {
       return;
     }
@@ -55,7 +61,8 @@ class App {
 
   renderError(error) {
     const listContainer = document.getElementById('list-container');
-    listContainer.innerHTML = `<div class="alert alert-error">${error.message}</div>`;
+    this.clearContainer(listContainer);
+    Util.createAndAppend('div', listContainer, { text: error.message, class: 'alert alert-error' });
   }
 }
 

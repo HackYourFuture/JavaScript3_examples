@@ -22,9 +22,9 @@
     const pre = document.getElementById('response');
     try {
       const data = await fetchJSON(url);
-      pre.innerHTML = JSON.stringify(data, null, 2);
+      pre.innerText = JSON.stringify(data, null, 2);
     } catch (err) {
-      pre.innerHTML = err.message;
+      pre.innerText = err.message;
     }
   }
 
@@ -36,7 +36,7 @@
     let counter = 0;
     setInterval(() => {
       counter += 1;
-      span.innerHTML = counter;
+      span.innerText = counter;
     }, 200);
   }
 

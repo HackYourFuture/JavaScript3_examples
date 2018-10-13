@@ -4,12 +4,26 @@
 
 // eslint-disable-next-line no-unused-vars
 class Prize {
-  constructor(data) {
-    this.data = data;
+  constructor(prizes) {
+    this.prizes = prizes;
+  }
+
+  renderLaureates(tbody) {
+    const tr = Util.createAndAppend('tr', tbody);
+    Util.createAndAppend('td', tr, { text: 'Laureate(s)', class: 'label' });
+    const td = Util.createAndAppend('td', tr);
+    const ul = Util.createAndAppend('ul', td);
+    this.prizes.laureates.forEach(laureate => {
+      const li = Util.createAndAppend('li', ul);
+      Util.createAndAppend('span', li, { text: `${laureate.firstname} ${laureate.surname || ''}` });
+      if (laureate.motivation) {
+        Util.createAndAppend('span', li, { text: `: ${laureate.motivation}`, class: 'motivation' });
+      }
+    });
   }
 
   render(parent) {
-    const { year, category, laureates } = this.data;
+    const { year, category } = this.prizes;
     const div = Util.createAndAppend('li', parent, {
       class: 'list-item'
     });
@@ -17,17 +31,6 @@ class Prize {
     const tbody = Util.createAndAppend('tbody', table);
     Util.addRow(tbody, 'Year', year);
     Util.addRow(tbody, 'Category', category);
-
-    let ulString = '<ul>';
-    laureates.forEach((laureate) => {
-      ulString += `<li>${laureate.firstname} ${laureate.surname || ''}`;
-      if (laureate.motivation) {
-        ulString += `:</br><em>${laureate.motivation}</em>`;
-      }
-      ulString += '</li>';
-    });
-    ulString += '</ul>';
-
-    Util.addRow(tbody, 'Laureate(s)', ulString);
+    this.renderLaureates(tbody);
   }
 }

@@ -4,8 +4,8 @@
 class Util {
   static addRow(tbody, label, value) {
     const tr = this.createAndAppend('tr', tbody);
-    this.createAndAppend('td', tr, { html: label + ':', class: 'label' });
-    this.createAndAppend('td', tr, { html: value });
+    this.createAndAppend('td', tr, { text: label + ':', class: 'label' });
+    this.createAndAppend('td', tr, { text: value });
   }
 
   static createAndAppend(name, parent, options = {}) {
@@ -13,8 +13,8 @@ class Util {
     parent.appendChild(elem);
     Object.keys(options).forEach((key) => {
       const value = options[key];
-      if (key === 'html') {
-        elem.innerHTML = value;
+      if (key === 'text') {
+        elem.innerText = value;
       } else {
         elem.setAttribute(key, value);
       }

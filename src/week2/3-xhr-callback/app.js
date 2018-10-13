@@ -19,7 +19,7 @@
   function fetchAndRender(url) {
     const pre = document.getElementById('response');
     fetchJSON(url, (err, data) => {
-      pre.innerHTML = err ? err.message : JSON.stringify(data, null, 2);
+      pre.innerText = err ? err.message : JSON.stringify(data, null, 2);
     });
   }
 
@@ -31,7 +31,7 @@
     let counter = 0;
     setInterval(() => {
       counter += 1;
-      span.innerHTML = counter;
+      span.innerText = counter;
     }, 200);
   }
 

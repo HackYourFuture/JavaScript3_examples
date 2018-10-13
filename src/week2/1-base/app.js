@@ -13,7 +13,7 @@
     let counter = 0;
     setInterval(() => {
       counter += 1;
-      span.innerHTML = counter;
+      span.innerText = counter;
     }, 200);
   }
 

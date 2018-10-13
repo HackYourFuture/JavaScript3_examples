@@ -14,7 +14,7 @@
     const root = document.getElementById('root');
     const div = document.createElement('div');
     div.className = 'utterance';
-    div.innerHTML = message;
+    div.innerText = message;
     root.appendChild(div);
   }
 

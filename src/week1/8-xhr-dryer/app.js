@@ -21,8 +21,8 @@
     parent.appendChild(elem);
     Object.keys(options).forEach((key) => {
       const value = options[key];
-      if (key === 'html') {
-        elem.innerHTML = value;
+      if (key === 'text') {
+        elem.innerText = value;
       } else {
         elem.setAttribute(key, value);
       }
@@ -32,8 +32,22 @@
 
   function addRow(tbody, label, value) {
     const tr = createAndAppend('tr', tbody);
-    createAndAppend('td', tr, { html: label + ':', class: 'label' });
-    createAndAppend('td', tr, { html: value });
+    createAndAppend('td', tr, { text: label + ':', class: 'label' });
+    createAndAppend('td', tr, { text: value });
+  }
+
+  function renderLaureatePrizes(tbody, prizes) {
+    const tr = createAndAppend('tr', tbody);
+    createAndAppend('td', tr, { text: 'Prizes:', class: 'label' });
+    const td = createAndAppend('td', tr);
+    const ul = createAndAppend('ul', td);
+    prizes.forEach(prize => {
+      const li = createAndAppend('li', ul);
+      createAndAppend('span', li, { text: `${prize.year}, ${prize.category}` });
+      if (prize.motivation) {
+        createAndAppend('span', li, { text: `: ${prize.motivation}`, class: 'motivation' });
+      }
+    });
   }
 
   function renderLaureates(laureates) {
@@ -45,20 +59,11 @@
       const table = createAndAppend('table', div);
       const tbody = createAndAppend('tbody', table);
       addRow(tbody, 'Name', `${firstname} ${surname || ''} `);
-      addRow(tbody, 'Born', laureate.born + '<br>' + laureate.bornCountry);
+      addRow(tbody, 'Born', `${laureate.born} (${laureate.bornCountry})`);
       if (laureate.died !== '0000-00-00') {
-        addRow(tbody, 'Died', laureate.died + '<br>' + laureate.diedCountry);
+        addRow(tbody, 'Died', `${laureate.died} (${laureate.diedCountry})`);
       }
-      let ulString = '<ul>';
-      laureate.prizes.forEach((prize) => {
-        ulString += `<li>${prize.year}, ${prize.category}`;
-        if (prize.motivation) {
-          ulString += `:</br> <em>${prize.motivation}</em>`;
-        }
-        ulString += '</li>';
-      });
-      ulString += '</ul>';
-      addRow(tbody, 'Prize(s)', ulString);
+      renderLaureatePrizes(tbody, laureate.prizes);
     });
   }
 

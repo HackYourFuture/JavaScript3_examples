@@ -21,8 +21,8 @@
     parent.appendChild(elem);
     Object.keys(options).forEach((key) => {
       const value = options[key];
-      if (key === 'html') {
-        elem.innerHTML = value;
+      if (key === 'text') {
+        elem.innerText = value;
       } else {
         elem.setAttribute(key, value);
       }
@@ -30,15 +30,36 @@
     return elem;
   }
 
+  function clearContainer(container) {
+    while (container.firstChild) {
+      container.removeChild(container.firstChild);
+    }
+  }
+
   function renderError(error) {
     const listContainer = document.getElementById('list-container');
-    listContainer.innerHTML = `<div class="alert alert-error">${error.message}</div>`;
+    clearContainer(listContainer);
+    createAndAppend('div', listContainer, { text: error.message, class: 'alert alert-error' });
   }
 
   function addRow(tbody, label, value) {
     const tr = createAndAppend('tr', tbody);
-    createAndAppend('td', tr, { html: label + ':', class: 'label' });
-    createAndAppend('td', tr, { html: value });
+    createAndAppend('td', tr, { text: label + ':', class: 'label' });
+    createAndAppend('td', tr, { text: value });
+  }
+
+  function renderPrizeLaureates(tbody, laureates) {
+    const tr = createAndAppend('tr', tbody);
+    createAndAppend('td', tr, { text: 'Laureate(s)', class: 'label' });
+    const td = createAndAppend('td', tr);
+    const ul = createAndAppend('ul', td);
+    laureates.forEach(laureate => {
+      const li = createAndAppend('li', ul);
+      createAndAppend('span', li, { text: `${laureate.firstname} ${laureate.surname || ''}` });
+      if (laureate.motivation) {
+        createAndAppend('span', li, { text: `: ${laureate.motivation}`, class: 'motivation' });
+      }
+    });
   }
 
   function renderPrizes(prizes, listContainer) {
@@ -48,18 +69,21 @@
       const tbody = createAndAppend('tbody', table);
       addRow(tbody, 'Year', prize.year);
       addRow(tbody, 'Category', prize.category);
+      renderPrizeLaureates(tbody, prize.laureates);
+    });
+  }
 
-      let ulString = '<ul>';
-      prize.laureates.forEach((laureate) => {
-        ulString += `<li>${laureate.firstname} ${laureate.surname || ''}`;
-        if (laureate.motivation) {
-          ulString += `:</br><em>${laureate.motivation}</em>`;
-        }
-        ulString += '</li>';
-      });
-      ulString += '</ul>';
-
-      addRow(tbody, 'Laureate(s)', ulString);
+  function renderLaureatePrizes(tbody, prizes) {
+    const tr = createAndAppend('tr', tbody);
+    createAndAppend('td', tr, { text: 'Prizes:', class: 'label' });
+    const td = createAndAppend('td', tr);
+    const ul = createAndAppend('ul', td);
+    prizes.forEach(prize => {
+      const li = createAndAppend('li', ul);
+      createAndAppend('span', li, { text: `${prize.year}, ${prize.category}` });
+      if (prize.motivation) {
+        createAndAppend('span', li, { text: `: ${prize.motivation}`, class: 'motivation' });
+      }
     });
   }
 
@@ -72,26 +96,17 @@
       const table = createAndAppend('table', div);
       const tbody = createAndAppend('tbody', table);
       addRow(tbody, 'Name', `${firstname} ${surname || ''} `);
-      addRow(tbody, 'Born', laureate.born + '<br>' + laureate.bornCountry);
+      addRow(tbody, 'Born', `${laureate.born} (${laureate.bornCountry})`);
       if (laureate.died !== '0000-00-00') {
-        addRow(tbody, 'Died', laureate.died + '<br>' + laureate.diedCountry);
+        addRow(tbody, 'Died', `${laureate.died} (${laureate.diedCountry})`);
       }
-      let ulString = '<ul>';
-      laureate.prizes.forEach((prize) => {
-        ulString += `<li>${prize.year}, ${prize.category}`;
-        if (prize.motivation) {
-          ulString += `:</br> <em>${prize.motivation}</em>`;
-        }
-        ulString += '</li>';
-      });
-      ulString += '</ul>';
-      addRow(tbody, 'Prize(s)', ulString);
+      renderLaureatePrizes(tbody, laureate.prizes);
     });
   }
 
   function onSelectionChange(url) {
     const listContainer = document.getElementById('list-container');
-    listContainer.innerHTML = '';
+    clearContainer(listContainer);
     if (url === '') {
       return;
     }
@@ -111,7 +126,7 @@
 
   function main(endPoints) {
     const root = document.getElementById('root');
-    createAndAppend('h1', root, { html: 'Nobel Prize Winners' });
+    createAndAppend('h1', root, { text: 'Nobel Prize Winners' });
     const header = createAndAppend('div', root);
 
     const select = createAndAppend('select', header, {
@@ -119,7 +134,7 @@
     });
     endPoints.forEach((endPoint) => {
       createAndAppend('option', select, {
-        html: endPoint.description,
+        text: endPoint.description,
         value: endPoint.url
       });
     });

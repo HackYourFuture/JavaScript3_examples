@@ -35,10 +35,10 @@
       const td1 = document.createElement('td');
       tr.appendChild(td1);
       td1.className = 'label';
-      td1.innerHTML = 'Name:';
+      td1.innerText = 'Name:';
       const td2 = document.createElement('td');
       tr.appendChild(td2);
-      td2.innerHTML = laureate.firstname + ' ' + (laureate.surname || '');
+      td2.innerText = laureate.firstname + ' ' + (laureate.surname || '');
     });
   }
 

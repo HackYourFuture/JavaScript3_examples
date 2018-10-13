@@ -1,53 +1,57 @@
 body {
-    font-family: 'Roboto', sans-serif;
-    width: 640px;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: #fafafa;
+  font-family: 'Roboto', sans-serif;
+  width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #fafafa;
 }
 
 table {
-    margin-top: 16px;
-    padding: 16px;
-    table-layout: fixed;
-    color: rgb(0, 0, 0, 81%);
+  margin-top: 16px;
+  padding: 16px;
+  table-layout: fixed;
+  color: rgb(0, 0, 0, 81%);
 }
 
 td {
-    padding: 10px;
-    vertical-align: top;
+  padding: 10px;
+  vertical-align: top;
 }
 
 td:first-child {
-    width: 80px;
+  width: 80px;
 }
 
 td.label {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 td ul {
-    margin-top: 0;
-    margin-bottom: 0;
-    padding-left: 16px;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 16px;
 }
 
 td li {
-    padding-bottom: 8px;
+  padding-bottom: 8px;
 }
 
 #list-container {
-    display: flex;
-    flex-direction: column;
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 
 .list-item {
-    margin-bottom: 8px;
-    border: none;
-    border-radius: 2px;
-    background-color: #fff;
-    box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.2), 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 3px 3px -2px rgba(0, 0, 0, 0.12);
+  margin-bottom: 8px;
+  border: none;
+  border-radius: 2px;
+  background-color: #fff;
+  box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.2), 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 3px 3px -2px rgba(0, 0, 0, 0.12);
+}
+
+.motivation {
+  font-style: italic;
 }
