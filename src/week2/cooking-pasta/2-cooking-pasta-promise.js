@@ -4,10 +4,17 @@
 
 const PROCESSING_TIME_MS = 3000;
 
-function process(action, item) {
-  return new Promise(resolve => {
+function process(action, item, fail = false) {
+  return new Promise((resolve, reject) => {
     console.log(`${action} ${item}...`);
-    setTimeout(resolve, PROCESSING_TIME_MS);
+    setTimeout(() => {
+      if (fail) {
+        reject(new Error(`${action} ${item} ❌`));
+      } else {
+        console.log(`${action} ${item} ✅`);
+        resolve();
+      }
+    }, PROCESSING_TIME_MS);
   });
 }
 
@@ -37,7 +44,7 @@ function cookPasta() {
 }
 
 function fryGarlic() {
-  return process('fry', 'garlic');
+  return process('fry', 'garlic', true);
 }
 
 function fryTomatoes() {
@@ -74,6 +81,10 @@ function main() {
     .then(() => {
       clearInterval(timerId);
       console.log('Enjoy this delicious pasta!');
+    })
+    .catch(err => {
+      clearInterval(timerId);
+      console.error(`${err.message}`);
     });
 }
 

@@ -4,9 +4,16 @@
 
 const PROCESSING_TIME_MS = 3000;
 
-function process(action, item, cb) {
+function process(action, item, cb, fail = false) {
   console.log(`${action} ${item}...`);
-  setTimeout(cb, PROCESSING_TIME_MS);
+  setTimeout(() => {
+    if (fail) {
+      cb(new Error(`${action} ${item} ❌`));
+    } else {
+      console.log(`${action} ${item} ✅`);
+      cb();
+    }
+  }, PROCESSING_TIME_MS);
 }
 
 function gatherIngredients(cb) {
@@ -30,7 +37,7 @@ function cookPasta(cb) {
 }
 
 function fryGarlic(cb) {
-  process('fry', 'garlic', cb);
+  process('fry', 'garlic', cb, true);
 }
 
 function fryTomatoes(cb) {
@@ -49,10 +56,14 @@ function processAll(todos, cb) {
   let todoCount = todos.length;
 
   function processTodo(todoFn, cb) {
-    todoFn(() => {
-      todoCount -= 1;
-      if (todoCount === 0) {
-        cb();
+    todoFn(err => {
+      if (err) {
+        cb(err);
+      } else {
+        todoCount -= 1;
+        if (todoCount === 0) {
+          cb();
+        }
       }
     });
   }
@@ -68,24 +79,49 @@ function startIntervalTimer() {
   }, 995);
 }
 
+function handleError(err, timerId) {
+  clearInterval(timerId);
+  console.error(`${err.message}`);
+}
+
 function main() {
   const timerId = startIntervalTimer();
 
   console.log('Preparing @razpudding\'s pasta recipe...');
 
-  gatherIngredients(() => {
-    cutGarlic(() => {
-      cutTomatoes(() => {
-        processAll([fryGarlic, fryTomatoes, boilWater], () => {
-          processAll([mixSauce, cookPasta], () => {
-            servePasta(() => {
-              clearInterval(timerId);
-              console.log('Enjoy this delicious pasta!');
-            });
+  gatherIngredients(err => {
+    if (err) {
+      handleError(err, timerId);
+    } else {
+      cutGarlic(err => {
+        if (err) {
+          handleError(err, timerId);
+        } else {
+          cutTomatoes(err => {
+            if (err) {
+              handleError(err, timerId);
+            } else {
+              processAll([fryGarlic, fryTomatoes, boilWater], err => {
+                if (err) {
+                  handleError(err, timerId);
+                } else {
+                  processAll([mixSauce, cookPasta], err => {
+                    if (err) {
+                      handleError(err, timerId);
+                    } else {
+                      servePasta(() => {
+                        clearInterval(timerId);
+                        console.log('Enjoy this delicious pasta!');
+                      });
+                    }
+                  });
+                }
+              });
+            }
           });
-        });
+        }
       });
-    });
+    }
   });
 }
 
