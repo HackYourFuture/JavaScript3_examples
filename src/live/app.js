@@ -1,6 +1,21 @@
 'use strict';
 {
-  // cb(err, data)
+  function fetchJSON(url) {
+    return new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', url);
+      xhr.responseType = 'json';
+      xhr.onload = () => {
+        if (xhr.status < 400) {
+          resolve(xhr.response);
+        } else {
+          reject(new Error(`Network error: ${xhr.status} - ${xhr.statusText}`));
+        }
+      };
+      xhr.onerror = () => reject(new Error('Network request failed'));
+      xhr.send();
+    });
+  }
 
   function createAndAppend(name, parent, options = {}) {
     const elem = document.createElement(name);
@@ -21,54 +36,52 @@
     createAndAppend('td', tr, { text: value });
   }
 
-  function renderLaureates(ul, data) {
-    ul.innerHTML = '';
-
-    data.laureates.forEach(laureate => {
-      const li = createAndAppend('li', ul, { class: 'list-item' });
-      const table = createAndAppend('table', li);
-      const tbody = createAndAppend('tbody', table);
-      const fullName = `${laureate.firstname} ${laureate.surname}`;
-      addRow('Name:', fullName, tbody);
-      const bornDetails = `${laureate.born}, ${laureate.bornCity}`;
-      addRow('Born:', bornDetails, tbody);
-    });
+  async function fetchAndRender(url, container) {
+    container.innerHTML = '';
+    const ul = createAndAppend('ul', container, { id: 'list-container' });
+    try {
+      const resp = await fetchJSON(url);
+      resp.laureates.forEach(laureate => {
+        const li = createAndAppend('li', ul, { class: 'list-item' });
+        const table = createAndAppend('table', li);
+        const tbody = createAndAppend('tbody', table);
+        const fullName = `${laureate.firstname} ${laureate.surname}`;
+        addRow('Name:', fullName, tbody);
+        const bornDetails = `${laureate.born}, ${laureate.bornCity}`;
+        addRow('Born:', bornDetails, tbody);
+      });
+    } catch (err) {
+      createAndAppend('p', container, { text: err.message });
+    }
   }
 
-  function main() {
-    const queries = [
-      {
-        description: 'All Dutch lauerates',
-        url: 'http://api.nobelprize.org/v1/laureate.json?bornCountryCode=NL'
-      },
-      {
-        description: 'All female laureates',
-        url: 'http://api.nobelprize.org/v1/laureate.json?gender=female'
-      }
-    ];
-
+  function main(queries) {
     const root = document.getElementById('root');
     const select = createAndAppend('select', root);
+
     queries.forEach((query, index) => {
       createAndAppend('option', select, { value: index, text: query.description });
     });
 
-    const ul = createAndAppend('ul', root, { id: 'list-container' });
-
     select.addEventListener('change', () => {
-      console.log(select.value);
       const query = queries[select.value];
-      fetchJSON(query.url, (err, data) => {
-        renderLaureates(ul, data);
-      });
+      fetchAndRender(query.url, container);
     });
 
-
-    fetchJSON(queries[0].url, (err, data) => {
-      renderLaureates(ul, data);
-    });
-
+    const container = createAndAppend('div', root, { id: 'list-container' });
+    fetchAndRender(queries[0].url, container);
   }
 
-  window.onload = main;
+  const QUERIES = [
+    {
+      description: 'All Dutch lauerates',
+      url: 'http://api.nobelprize.org/v1/laureate.json?bornCountryCode=NL'
+    },
+    {
+      description: 'All female laureates',
+      url: 'http://api.nobelprize.org/v1/laureate.json?gender=female'
+    }
+  ];
+
+  window.onload = () => main(QUERIES);
 }
