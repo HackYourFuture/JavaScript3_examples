@@ -25,7 +25,9 @@
 
     deal(container, count) {
       if (this.canDeal(count)) {
-        const dealContainer = window.createAndAppend('div', container, { class: 'deal-container' });
+        const dealContainer = window.createAndAppend('div', container, {
+          class: 'deal-container'
+        });
         const cards = this.cards.splice(0, count);
         cards.forEach(card => card.render(dealContainer));
       }

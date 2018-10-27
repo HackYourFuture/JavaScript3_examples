@@ -32,11 +32,11 @@
       this.dealButton.addEventListener('click', () => this.deal(DEAL_COUNT));
       this.updateDealLabel();
 
-      const shuffleButton = window.createAndAppend('button', toolbar, {
+      const newGameButton = window.createAndAppend('button', toolbar, {
         class: 'button',
-        text: 'SHUFFLE'
+        text: 'NEW GAME'
       });
-      shuffleButton.addEventListener('click', () => this.shuffle());
+      newGameButton.addEventListener('click', () => this.newGame());
     }
 
     deal(count) {
@@ -53,7 +53,7 @@
       this.dealCount += 1;
     }
 
-    shuffle() {
+    newGame() {
       while (this.gameContainer.firstChild) {
         this.gameContainer.removeChild(this.gameContainer.firstChild);
       }

@@ -1,24 +1,24 @@
 'use strict';
 {
-  const CARD_TEMPLATE = `
+  const getCardHtml = (rank, symbol) => `
     <div class='card-row row-top'>
-      <div>
-        <div class="card-rank">__rank__</div>
-        <div class="card-symbol">__suit__</div>
+      <div class="card-text">
+        <div>${rank}</div>
+        <div class="card-symbol">${symbol}</div>
       </div>
-      <div>
-        <div class="card-rank">__rank__</div>
-        <div class="card-symbol">__suit__</div>
+      <div class="card-text">
+        <div>${rank}</div>
+        <div class="card-symbol">${symbol}</div>
       </div>
     </div>
     <div class='card-row row-bottom'>
-      <div>
-        <div class="card-rank">__rank__</div>
-        <div class="card-symbol">__suit__</div>
+      <div class="card-text">
+        <div>${rank}</div>
+        <div class="card-symbol">${symbol}</div>
       </div>
-      <div>
-        <div class="card-rank">__rank__</div>
-        <div class="card-symbol">__suit__</div>
+      <div class="card-text">
+        <div>${rank}</div>
+        <div class="card-symbol">${symbol}</div>
       </div>
     </div>`;
 
@@ -34,10 +34,7 @@
         class: 'card-container',
         style: `color: ${this.color}`
       });
-
-      cardContainer.innerHTML = CARD_TEMPLATE
-        .replace(/__rank__/g, this.rank)
-        .replace(/__suit__/g, this.symbol);
+      cardContainer.innerHTML = getCardHtml(this.rank, this.symbol);
     }
   }
 
