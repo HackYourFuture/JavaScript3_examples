@@ -1,14 +1,16 @@
 'use strict';
 
-const FG_RED = "\x1b[31m";
-const FG_WHITE = "\x1b[37m";
-const FG_GREEN = "\x1b[32m";
+const FG = {
+  red: '\x1b[31m',
+  white: '\x1b[37m',
+  green: '\x1b[32m'
+};
 
 const CARD_SUITES = [
-  { symbol: '♦️', color: FG_RED, name: 'tiles' },
-  { symbol: '♠️', color: FG_WHITE, name: 'pikes' },
-  { symbol: '♥️', color: FG_RED, name: 'hearts' },
-  { symbol: '♣️', color: FG_WHITE, name: 'clovers' },
+  { symbol: '♦️', color: FG.red, name: 'tiles' },
+  { symbol: '♠️', color: FG.white, name: 'pikes' },
+  { symbol: '♥️', color: FG.red, name: 'hearts' },
+  { symbol: '♣️', color: FG.white, name: 'clovers' },
 ];
 
 const CARD_RANKS = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
@@ -22,6 +24,10 @@ class Card {
     this.color = color;
     this.rank = rank;
   }
+
+  getCardFace() {
+    return `${this.color}${this.symbol}${this.rank}${FG.white}`;
+  }
 }
 
 /**
@@ -34,33 +40,36 @@ class CardDeck {
       const suitCards = CARD_RANKS.map(rank => new Card(suit.symbol, suit.color, rank));
       this.allCards = this.allCards.concat(suitCards);
     });
-    this.gameCards = this.allCards.slice();
+    this.cards = this.allCards.slice();
   }
 
   canDeal(count) {
-    return this.gameCards.length >= count;
+    return this.cards.length >= count;
   }
 
   deal(count) {
-    if (!this.canDeal(count)) {
-      return;
+    if (this.canDeal(count)) {
+      const cards = this.cards.splice(0, count);
+      this.render(cards);
     }
+  }
 
-    const cards = this.gameCards.splice(0, count);
+  render(cards) {
     const text = cards
-      .map(card => `${card.color}${card.symbol}${card.rank}${FG_WHITE}`)
+      .map(card => card.getCardFace())
       .join(' ');
 
     console.log(text);
   }
 
   shuffle() {
-    console.log(`\n${FG_GREEN}Shuffling...${FG_WHITE}\n`);
+    console.log(`\n${FG.green}Shuffling...\n`);
+
     // ref: https://stackoverflow.com/questions/6274339/how-can-i-shuffle-an-array
-    this.gameCards = this.allCards.slice();
-    for (let i = this.gameCards.length - 1; i > 0; i--) {
+    this.cards = this.allCards.slice();
+    for (let i = this.cards.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [this.gameCards[i], this.gameCards[j]] = [this.gameCards[j], this.gameCards[i]];
+      [this.cards[i], this.cards[j]] = [this.cards[j], this.cards[i]];
     }
   }
 }
