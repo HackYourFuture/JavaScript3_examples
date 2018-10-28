@@ -6,11 +6,11 @@ const FG = {
   green: '\x1b[32m'
 };
 
-const CARD_SUITES = [
-  { symbol: '♦️', color: FG.red, name: 'tiles' },
-  { symbol: '♠️', color: FG.white, name: 'pikes' },
+const CARD_SUITS = [
+  { symbol: '♦️', color: FG.red, name: 'diamond' },
+  { symbol: '♠️', color: FG.white, name: 'spades' },
   { symbol: '♥️', color: FG.red, name: 'hearts' },
-  { symbol: '♣️', color: FG.white, name: 'clovers' },
+  { symbol: '♣️', color: FG.white, name: 'clubs' },
 ];
 
 const CARD_RANKS = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
@@ -25,7 +25,7 @@ class Card {
     this.rank = rank;
   }
 
-  getCardFace() {
+  getCard() {
     return `${this.color}${this.symbol}${this.rank}${FG.white}`;
   }
 }
@@ -36,7 +36,7 @@ class Card {
 class CardDeck {
   constructor() {
     this.allCards = [];
-    CARD_SUITES.forEach(suit => {
+    CARD_SUITS.forEach(suit => {
       const suitCards = CARD_RANKS.map(rank => new Card(suit.symbol, suit.color, rank));
       this.allCards = this.allCards.concat(suitCards);
     });
@@ -56,7 +56,7 @@ class CardDeck {
 
   render(cards) {
     const text = cards
-      .map(card => card.getCardFace())
+      .map(card => card.getCard())
       .join(' ');
 
     console.log(text);

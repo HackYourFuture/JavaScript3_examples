@@ -1,6 +1,6 @@
 'use strict';
 {
-  const CARD_SUITES = [
+  const CARD_SUITS = [
     { symbol: '♦️', color: 'red' },
     { symbol: '♠️', color: 'black' },
     { symbol: '♥️', color: 'red' },
@@ -12,7 +12,7 @@
   class CardDeck {
     constructor() {
       this.allCards = [];
-      CARD_SUITES.forEach(suit => {
+      CARD_SUITS.forEach(suit => {
         const suitCards = CARD_RANKS.map(rank => window.createCard(suit.symbol, suit.color, rank));
         this.allCards = this.allCards.concat(suitCards);
       });
