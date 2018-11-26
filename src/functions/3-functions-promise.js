@@ -3,8 +3,8 @@
 const { startTimer, stopTimer } = require('./timer');
 
 const campbellsTomatoSoup = {
-  brand: 'Campbell\'s',
-  contents: 'tomato soup'
+  brand: "Campbell's",
+  contents: 'tomato soup',
 };
 
 function say(message) {
@@ -14,7 +14,7 @@ function say(message) {
 function openCan(foodCan) {
   const { brand, contents } = foodCan;
   say(`Using can opener to open a can of ${brand} ${contents}.`);
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     setTimeout(() => {
       say(`Opened the can of ${contents}.`);
       resolve(contents);
@@ -24,7 +24,7 @@ function openCan(foodCan) {
 
 function warmUp(food) {
   say(`Warming up the ${food}.`);
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     setTimeout(() => {
       say(`Warmed up the ${food}.`);
       resolve('hot ' + food);
@@ -33,7 +33,7 @@ function warmUp(food) {
 }
 
 function eat(food) {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     say(`Eating the ${food}.`);
     setTimeout(() => {
       say(`Finished the ${food}.`);
@@ -49,13 +49,12 @@ function eatLunch(foodCan) {
 }
 
 function main() {
-  say('It\'s lunch time!');
+  say("It's lunch time!");
   startTimer(counter => say(counter));
-  eatLunch(campbellsTomatoSoup)
-    .then(() => {
-      stopTimer();
-      say('Finished lunch');
-    });
+  eatLunch(campbellsTomatoSoup).then(() => {
+    stopTimer();
+    say('Finished lunch');
+  });
 }
 
 main();

@@ -21,10 +21,10 @@
   function fetchAndRender(url) {
     const pre = document.getElementById('response');
     fetchJSON(url)
-      .then((data) => {
+      .then(data => {
         pre.innerText = JSON.stringify(data, null, 2);
       })
-      .catch((err) => {
+      .catch(err => {
         pre.innerText = err.message;
       });
   }

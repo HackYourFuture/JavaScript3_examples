@@ -3,8 +3,8 @@
 const { startTimer, stopTimer } = require('./timer');
 
 const campbellsTomatoSoup = {
-  brand: 'Campbell\'s',
-  contents: 'tomato soup'
+  brand: "Campbell's",
+  contents: 'tomato soup',
 };
 
 function say(message) {
@@ -37,15 +37,15 @@ function eat(food, onFinished) {
 }
 
 function eatLunch(foodCan, onFinished) {
-  openCan(foodCan, (contents) => {
-    warmUp(contents, (hotFood) => {
+  openCan(foodCan, contents => {
+    warmUp(contents, hotFood => {
       eat(hotFood, onFinished);
     });
   });
 }
 
 function main() {
-  say('It\'s lunch time!');
+  say("It's lunch time!");
   startTimer(counter => say(counter));
   eatLunch(campbellsTomatoSoup, () => {
     stopTimer();

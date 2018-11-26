@@ -27,7 +27,7 @@
     const listContainer = createAndAppend('ul', root);
     listContainer.id = 'list-container';
 
-    laureates.forEach((laureate) => {
+    laureates.forEach(laureate => {
       const listItem = createAndAppend('li', listContainer);
       listItem.className = 'list-item';
       const table = createAndAppend('table', listItem);

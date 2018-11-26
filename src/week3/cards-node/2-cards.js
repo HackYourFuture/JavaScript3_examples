@@ -3,7 +3,7 @@
 const FG = {
   red: '\x1b[31m',
   white: '\x1b[37m',
-  green: '\x1b[32m'
+  green: '\x1b[32m',
 };
 
 const CARD_SUITS = [
@@ -55,9 +55,7 @@ class CardDeck {
   }
 
   render(cards) {
-    const text = cards
-      .map(card => card.getCard())
-      .join(' ');
+    const text = cards.map(card => card.getCard()).join(' ');
 
     console.log(text);
   }

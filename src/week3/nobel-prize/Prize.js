@@ -25,7 +25,7 @@ class Prize {
   render(parent) {
     const { year, category } = this.prizes;
     const div = Util.createAndAppend('li', parent, {
-      class: 'list-item'
+      class: 'list-item',
     });
     const table = Util.createAndAppend('table', div);
     const tbody = Util.createAndAppend('tbody', table);

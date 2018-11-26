@@ -10,7 +10,7 @@ class SpeechSynthesizer {
 
   initialize(render) {
     this.render = render;
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       speechSynthesis.onvoiceschanged = () => {
         this.voices = speechSynthesis.getVoices();
         console.table(this.voices);
@@ -20,7 +20,7 @@ class SpeechSynthesizer {
   }
 
   speak(message) {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       this.utterance = new SpeechSynthesisUtterance();
       this.utterance.text = message;
       this.utterance.voice = this.voices.find(voice => voice.name === this.name);

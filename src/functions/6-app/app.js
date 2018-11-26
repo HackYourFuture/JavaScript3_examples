@@ -6,8 +6,8 @@
   const synthesizer = new SpeechSynthesizer('Google UK English Male');
 
   const campbellsTomatoSoup = {
-    brand: 'Campbell\'s',
-    contents: 'tomato soup'
+    brand: "Campbell's",
+    contents: 'tomato soup',
   };
 
   function render(message) {
@@ -52,7 +52,7 @@
 
   async function main() {
     await synthesizer.initialize(render);
-    await say('It\'s lunch time!');
+    await say("It's lunch time!");
     await eatLunch(campbellsTomatoSoup);
     await say('Finished lunch.');
   }

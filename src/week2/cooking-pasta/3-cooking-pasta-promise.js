@@ -39,7 +39,7 @@ function startIntervalTimer() {
 function main() {
   const timerId = startIntervalTimer();
 
-  console.log('Preparing @razpudding\'s pasta recipe...');
+  console.log("Preparing @razpudding's pasta recipe...");
 
   gatherIngredients()
     .then(cutGarlic)

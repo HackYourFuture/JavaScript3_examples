@@ -3,19 +3,18 @@
 const myCat = {
   name: 'Binky',
   color: 'black',
-  greet: function (greeting, closing) {
+  greet: function(greeting, closing) {
     console.log(greeting + ' ' + this.name + closing);
-  }
+  },
 };
 
 myCat.greet('Hello', ', where have you been?');
-
 
 function Dog(name, color) {
   this.name = name;
   this.color = color;
 
-  this.greet = function (greeting, closing) {
+  this.greet = function(greeting, closing) {
     console.log(greeting + ' ' + this.name + closing);
   };
 }
@@ -39,7 +38,7 @@ function greetDog(greeting, closing) {
 
 const herDog = {
   name: 'Rocky',
-  greet: greetDog
+  greet: greetDog,
 };
 
 herDog.greet('Where are you', '?');

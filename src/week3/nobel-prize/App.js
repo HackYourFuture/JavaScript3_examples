@@ -9,12 +9,12 @@ class App {
     const header = Util.createAndAppend('div', root);
 
     const select = Util.createAndAppend('select', header, {
-      placeholder: 'Select a query'
+      placeholder: 'Select a query',
     });
-    endPoints.forEach((endPoint) => {
+    endPoints.forEach(endPoint => {
       Util.createAndAppend('option', select, {
         text: endPoint.description,
-        value: endPoint.url
+        value: endPoint.url,
       });
     });
     select.addEventListener('change', e => this.onSelectionChange(e.target.value));
@@ -48,9 +48,7 @@ class App {
   }
 
   renderPrizes(prizes, listContainer) {
-    prizes
-      .map(prize => new Prize(prize))
-      .forEach(prize => prize.render(listContainer));
+    prizes.map(prize => new Prize(prize)).forEach(prize => prize.render(listContainer));
   }
 
   renderLaureates(laureates, listContainer) {
@@ -72,27 +70,27 @@ const PRIZE_END_POINT = 'http://api.nobelprize.org/v1/prize.json?';
 const NOBEL_PRIZE_END_POINTS = [
   {
     description: 'Select a query',
-    url: ''
+    url: '',
   },
   {
     description: 'All female laureates',
-    url: LAUREATE_END_POINT + 'gender=female'
+    url: LAUREATE_END_POINT + 'gender=female',
   },
   {
     description: 'All Dutch laureates',
-    url: LAUREATE_END_POINT + 'bornCountryCode=NL'
+    url: LAUREATE_END_POINT + 'bornCountryCode=NL',
   },
   {
     description: 'Physics prizes 1900-1925',
-    url: PRIZE_END_POINT + 'year=1925&yearTo=25&category=physics'
+    url: PRIZE_END_POINT + 'year=1925&yearTo=25&category=physics',
   },
   {
     description: 'Nobel Prizes 2017',
-    url: PRIZE_END_POINT + 'year=2017'
+    url: PRIZE_END_POINT + 'year=2017',
   },
   {
     description: 'Physicists working on quantum electrodynamics',
-    url: LAUREATE_END_POINT + 'motivation=quantum electrodynamics'
+    url: LAUREATE_END_POINT + 'motivation=quantum electrodynamics',
   },
 ];
 

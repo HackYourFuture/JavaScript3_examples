@@ -23,9 +23,7 @@ class Laureate {
   }
 
   render(parent) {
-    const {
-      surname, firstname, born, bornCountry, died, diedCountry
-    } = this.laureates;
+    const { surname, firstname, born, bornCountry, died, diedCountry } = this.laureates;
     const div = Util.createAndAppend('li', parent, { class: 'list-item' });
     const table = Util.createAndAppend('table', div);
     const tbody = Util.createAndAppend('tbody', table);

@@ -22,7 +22,7 @@
     root.appendChild(listContainer);
     listContainer.id = 'list-container';
 
-    laureates.forEach((laureate) => {
+    laureates.forEach(laureate => {
       const listItem = document.createElement('li');
       listItem.className = 'list-item';
       listContainer.appendChild(listItem);

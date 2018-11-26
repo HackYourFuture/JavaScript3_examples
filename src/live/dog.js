@@ -31,5 +31,3 @@ const myCat = new Cat('Binky', 'black');
 
 myDog.makeSound();
 myCat.makeSound();
-
-
