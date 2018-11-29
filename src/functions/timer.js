@@ -21,5 +21,5 @@ function stopTimer() {
 
 module.exports = {
   startTimer,
-  stopTimer
+  stopTimer,
 };

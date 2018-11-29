@@ -36,4 +36,3 @@ class CardDeck {
 
 const myCards = new CardDeck();
 console.log(myCards.getCards());
-

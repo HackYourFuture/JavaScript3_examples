@@ -48,9 +48,7 @@ class CardDeck {
   }
 
   render(cards) {
-    const text = cards
-      .map(card => card.getCard())
-      .join(' ');
+    const text = cards.map(card => card.getCard()).join(' ');
 
     console.log(text);
   }
@@ -66,4 +64,3 @@ function main() {
 }
 
 main();
-

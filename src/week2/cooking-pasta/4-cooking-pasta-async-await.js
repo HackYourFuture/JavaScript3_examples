@@ -18,7 +18,6 @@ function process(action, item, fail = false) {
   });
 }
 
-
 const gatherIngredients = () => process('gather', 'ingredients');
 const cutGarlic = () => process('cut', 'garlic');
 const cutTomatoes = () => process('cut', 'tomatoes');
@@ -40,7 +39,7 @@ function startIntervalTimer() {
 async function main() {
   const timerId = startIntervalTimer();
 
-  console.log('Preparing @razpudding\'s pasta recipe...');
+  console.log("Preparing @razpudding's pasta recipe...");
 
   try {
     await gatherIngredients();

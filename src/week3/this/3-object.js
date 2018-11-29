@@ -1,11 +1,21 @@
 'use strict';
 
+const myCat = {
+  name: 'Binky',
+  color: 'black',
+  greet: function(greeting, closing) {
+    console.log(greeting + ' ' + this.name + closing);
+  },
+};
+
+myCat.greet('Hello', ', where have you been?');
+
 function Dog(name, color) {
   this.name = name;
   this.color = color;
 
-  this.greet = function (greeting, punctuation) {
-    console.log(greeting + ' ' + this.name + punctuation);
+  this.greet = function(greeting, closing) {
+    console.log(greeting + ' ' + this.name + closing);
   };
 }
 
@@ -22,13 +32,13 @@ greet.apply(myDog, ['Nice dog,', '!']);
 const greet2 = myDog.greet.bind(myDog);
 greet2('Hi there again', '!');
 
-function greetDog(greeting, punctuation) {
-  console.log(greeting + ' ' + this.name + punctuation);
+function greetDog(greeting, closing) {
+  console.log(greeting + ' ' + this.name + closing);
 }
 
 const herDog = {
   name: 'Rocky',
-  greet: greetDog
+  greet: greetDog,
 };
 
 herDog.greet('Where are you', '?');

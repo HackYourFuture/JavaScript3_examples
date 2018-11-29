@@ -1,8 +1,8 @@
 'use strict';
 
 const campbellsTomatoSoup = {
-  brand: 'Campbell\'s',
-  contents: 'tomato soup'
+  brand: "Campbell's",
+  contents: 'tomato soup',
 };
 
 function say(message) {
@@ -34,7 +34,7 @@ function eatLunch(foodCan) {
 }
 
 function main() {
-  say('It\'s lunch time!');
+  say("It's lunch time!");
   eatLunch(campbellsTomatoSoup);
   say('Finished lunch,');
 }

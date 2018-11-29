@@ -32,7 +32,7 @@
     render(container) {
       const cardContainer = window.createAndAppend('div', container, {
         class: 'card-container',
-        style: `color: ${this.color}`
+        style: `color: ${this.color}`,
       });
       cardContainer.innerHTML = getCardHtml(this.rank, this.symbol);
     }
@@ -40,4 +40,3 @@
 
   window.createCard = (symbol, color, rank) => new Card(symbol, color, rank);
 }
-

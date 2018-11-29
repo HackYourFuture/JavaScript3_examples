@@ -1,12 +1,11 @@
 'use strict';
 
-
 const myCat = {
   name: 'Binky',
   color: 'black',
   greet(greeting, closing) {
     console.log(greeting + ' ' + this.name + closing);
-  }
+  },
 };
 
 myCat.greet('Hello', ', where have you been????');
@@ -21,4 +20,3 @@ const greet2 = myCat.greet.bind(myCat);
 // console.log(greetFn === myCat.greet);
 
 greet2('Hello', '!!!!');
-

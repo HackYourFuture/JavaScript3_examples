@@ -3,8 +3,8 @@
 const { startTimer, stopTimer } = require('./timer');
 
 const campbellsTomatoSoup = {
-  brand: 'Campbell\'s',
-  contents: 'tomato soup'
+  brand: "Campbell's",
+  contents: 'tomato soup',
 };
 
 function say(message) {
@@ -43,7 +43,7 @@ async function eatLunch(foodCan) {
 }
 
 async function main() {
-  say('It\'s lunch time!');
+  say("It's lunch time!");
   startTimer(counter => say(counter));
   await eatLunch(campbellsTomatoSoup);
   stopTimer();

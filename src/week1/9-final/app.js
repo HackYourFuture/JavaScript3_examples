@@ -19,7 +19,7 @@
   function createAndAppend(name, parent, options = {}) {
     const elem = document.createElement(name);
     parent.appendChild(elem);
-    Object.keys(options).forEach((key) => {
+    Object.keys(options).forEach(key => {
       const value = options[key];
       if (key === 'text') {
         elem.innerText = value;
@@ -63,7 +63,7 @@
   }
 
   function renderPrizes(prizes, listContainer) {
-    prizes.forEach((prize) => {
+    prizes.forEach(prize => {
       const div = createAndAppend('li', listContainer, { class: 'list-item' });
       const table = createAndAppend('table', div);
       const tbody = createAndAppend('tbody', table);
@@ -88,10 +88,10 @@
   }
 
   function renderLaureates(laureates, listContainer) {
-    laureates.forEach((laureate) => {
+    laureates.forEach(laureate => {
       const { surname, firstname } = laureate;
       const div = createAndAppend('li', listContainer, {
-        class: 'list-item'
+        class: 'list-item',
       });
       const table = createAndAppend('table', div);
       const tbody = createAndAppend('tbody', table);
@@ -130,12 +130,12 @@
     const header = createAndAppend('div', root);
 
     const select = createAndAppend('select', header, {
-      placeholder: 'Select a query'
+      placeholder: 'Select a query',
     });
-    endPoints.forEach((endPoint) => {
+    endPoints.forEach(endPoint => {
       createAndAppend('option', select, {
         text: endPoint.description,
-        value: endPoint.url
+        value: endPoint.url,
       });
     });
     select.addEventListener('change', e => onSelectionChange(e.target.value));
@@ -149,27 +149,27 @@
   const NOBEL_PRIZE_END_POINTS = [
     {
       description: 'Select a query',
-      url: ''
+      url: '',
     },
     {
       description: 'All female laureates',
-      url: LAUREATE_END_POINT + 'gender=female'
+      url: LAUREATE_END_POINT + 'gender=female',
     },
     {
       description: 'All Dutch laureates',
-      url: LAUREATE_END_POINT + 'bornCountryCode=NL'
+      url: LAUREATE_END_POINT + 'bornCountryCode=NL',
     },
     {
       description: 'Physics prizes 1900-1925',
-      url: PRIZE_END_POINT + 'year=1925&yearTo=25&category=physics'
+      url: PRIZE_END_POINT + 'year=1925&yearTo=25&category=physics',
     },
     {
       description: 'Nobel Prizes 2017',
-      url: PRIZE_END_POINT + 'year=2017'
+      url: PRIZE_END_POINT + 'year=2017',
     },
     {
       description: 'Physicists working on quantum electrodynamics',
-      url: LAUREATE_END_POINT + 'motivation=quantum electrodynamics'
+      url: LAUREATE_END_POINT + 'motivation=quantum electrodynamics',
     },
   ];
 

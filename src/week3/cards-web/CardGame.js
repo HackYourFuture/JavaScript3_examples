@@ -1,9 +1,7 @@
 'use strict';
 {
   const DEAL_COUNT = 5;
-  const DEAL_LABELS = [
-    '1ST', '2ND', '3RD', '4TH', '5TH', '6TH', '7TH', '8TH', '9TH', '10TH'
-  ];
+  const DEAL_LABELS = ['1ST', '2ND', '3RD', '4TH', '5TH', '6TH', '7TH', '8TH', '9TH', '10TH'];
 
   class CardGame {
     constructor(cardDeck) {
@@ -15,7 +13,7 @@
       this.renderToolbar(root);
 
       this.gameContainer = window.createAndAppend('div', root, {
-        class: 'card-deck'
+        class: 'card-deck',
       });
 
       this.cardDeck.shuffle();
@@ -23,7 +21,7 @@
 
     renderToolbar(root) {
       const toolbar = window.createAndAppend('div', root, {
-        class: 'toolbar'
+        class: 'toolbar',
       });
 
       this.dealButton = window.createAndAppend('button', toolbar, {
@@ -34,7 +32,7 @@
 
       const newGameButton = window.createAndAppend('button', toolbar, {
         class: 'button',
-        text: 'NEW GAME'
+        text: 'NEW GAME',
       });
       newGameButton.addEventListener('click', () => this.newGame());
     }

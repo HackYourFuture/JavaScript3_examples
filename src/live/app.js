@@ -75,12 +75,12 @@
   const QUERIES = [
     {
       description: 'All Dutch lauerates',
-      url: 'http://api.nobelprize.org/v1/laureate.json?bornCountryCode=NL'
+      url: 'http://api.nobelprize.org/v1/laureate.json?bornCountryCode=NL',
     },
     {
       description: 'All female laureates',
-      url: 'http://api.nobelprize.org/v1/laureate.json?gender=female'
-    }
+      url: 'http://api.nobelprize.org/v1/laureate.json?gender=female',
+    },
   ];
 
   window.onload = () => main(QUERIES);

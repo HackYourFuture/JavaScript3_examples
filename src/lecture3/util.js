@@ -1,6 +1,6 @@
 'use strict';
 
-// eslint-disable-next-line no-unused-vars 
+// eslint-disable-next-line no-unused-vars
 function fetchJSON(url) {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
@@ -18,7 +18,7 @@ function fetchJSON(url) {
   });
 }
 
-// eslint-disable-next-line no-unused-vars 
+// eslint-disable-next-line no-unused-vars
 function createAndAppend(name, parent, options = {}) {
   const elem = document.createElement(name);
   parent.appendChild(elem);
