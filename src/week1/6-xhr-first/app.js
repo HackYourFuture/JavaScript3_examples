@@ -18,27 +18,15 @@
 
   function renderLaureates(laureates) {
     const root = document.getElementById('root');
-    const listContainer = document.createElement('ul');
-    root.appendChild(listContainer);
-    listContainer.id = 'list-container';
+    const ul = document.createElement('ul');
+    root.appendChild(ul);
+    ul.id = 'list-container';
 
     laureates.forEach(laureate => {
-      const listItem = document.createElement('li');
-      listItem.className = 'list-item';
-      listContainer.appendChild(listItem);
-      const table = document.createElement('table');
-      listItem.appendChild(table);
-      const tbody = document.createElement('tbody');
-      table.appendChild(tbody);
-      const tr = document.createElement('tr');
-      tbody.appendChild(tr);
-      const td1 = document.createElement('td');
-      tr.appendChild(td1);
-      td1.className = 'label';
-      td1.innerText = 'Name:';
-      const td2 = document.createElement('td');
-      tr.appendChild(td2);
-      td2.innerText = laureate.firstname + ' ' + (laureate.surname || '');
+      const li = document.createElement('li');
+      ul.appendChild(li);
+      li.className = 'list-item';
+      li.innerText = `Name: ${laureate.firstname} ${laureate.surname}`;
     });
   }
 

@@ -30,15 +30,40 @@
     return elem;
   }
 
+  function addRow(tbody, label, value) {
+    const tr = createAndAppend('tr', tbody);
+    createAndAppend('td', tr, { text: label + ':', class: 'label' });
+    createAndAppend('td', tr, { text: value });
+  }
+
+  function renderLaureatePrizes(tbody, prizes) {
+    const tr = createAndAppend('tr', tbody);
+    createAndAppend('td', tr, { text: 'Prizes:', class: 'label' });
+    const td = createAndAppend('td', tr);
+    const ul = createAndAppend('ul', td);
+    prizes.forEach(prize => {
+      const li = createAndAppend('li', ul);
+      createAndAppend('span', li, { text: `${prize.year}, ${prize.category}` });
+      if (prize.motivation) {
+        createAndAppend('span', li, { text: `: ${prize.motivation}`, class: 'motivation' });
+      }
+    });
+  }
+
   function renderLaureates(laureates) {
     const root = document.getElementById('root');
     const ul = createAndAppend('ul', root, { id: 'list-container' });
-
     laureates.forEach(laureate => {
-      createAndAppend('li', ul, {
-        class: 'list-item',
-        text: `Name: ${laureate.firstname} ${laureate.surname}`,
-      });
+      const { surname, firstname } = laureate;
+      const div = createAndAppend('li', ul, { class: 'list-item' });
+      const table = createAndAppend('table', div);
+      const tbody = createAndAppend('tbody', table);
+      addRow(tbody, 'Name', `${firstname} ${surname || ''} `);
+      addRow(tbody, 'Born', `${laureate.born} (${laureate.bornCountry})`);
+      if (laureate.died !== '0000-00-00') {
+        addRow(tbody, 'Died', `${laureate.died} (${laureate.diedCountry})`);
+      }
+      renderLaureatePrizes(tbody, laureate.prizes);
     });
   }
 

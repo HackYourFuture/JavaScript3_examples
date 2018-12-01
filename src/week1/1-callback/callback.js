@@ -1,12 +1,10 @@
 'use strict';
 
 function timerStopped() {
-  console.log('timer stopped');
+  console.log('STOPPED');
 }
 
-function startTimer(duration, callback) {
-  console.log('timer started');
-  setTimeout(callback, duration);
-}
+console.log('STARTING');
+setTimeout(timerStopped, 3000);
 
-startTimer(2000, timerStopped);
+console.log('STARTED...');
