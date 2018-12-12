@@ -1,0 +1,18 @@
+body {
+    display: flex;
+    background: #f1f1f1;
+}
+
+#response {
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
