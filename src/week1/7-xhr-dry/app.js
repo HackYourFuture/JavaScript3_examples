@@ -30,7 +30,7 @@
     laureates.forEach(laureate => {
       const li = createAndAppend('li', ul);
       li.className = 'list-item';
-      li.innerText = `Name: ${laureate.firstname} ${laureate.surname}`;
+      li.textContent = `Name: ${laureate.firstname} ${laureate.surname}`;
     });
   }
 

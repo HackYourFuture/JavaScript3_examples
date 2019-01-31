@@ -14,7 +14,7 @@
   function fetchAndRender(url) {
     const pre = document.getElementById('response');
     const prizeData = fetchJSON(url);
-    pre.innerText = JSON.stringify(prizeData, null, 2);
+    pre.textContent = JSON.stringify(prizeData, null, 2);
   }
 
   function main(url) {
@@ -25,7 +25,7 @@
     let counter = 0;
     setInterval(() => {
       counter += 1;
-      span.innerText = counter;
+      span.textContent = counter;
     }, 200);
   }
 

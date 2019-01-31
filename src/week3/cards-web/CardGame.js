@@ -47,7 +47,7 @@
     }
 
     updateDealLabel() {
-      this.dealButton.innerText = `DEAL ${DEAL_LABELS[this.dealCount]}`;
+      this.dealButton.textContent = `DEAL ${DEAL_LABELS[this.dealCount]}`;
       this.dealCount += 1;
     }
 

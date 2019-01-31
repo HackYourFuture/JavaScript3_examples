@@ -80,13 +80,13 @@ This folder contains the finished version of the Nobel Prize SPA:
 - It adds styling through an external stylesheet (`style.css`), that is loaded via the `index.html` file.
 - It adds a `<select>` element that contains collection of queries that can be made against the Nobel Prize API.
 - It adds an event handler to the `change` event of the `<select>` element, so that a new XMLHttpRequest is made whenever the selection changes.
-- It extends the `createAndAppend` function with an ability to specify the `innerText` and any HTML attributes to the newly created element in a single call to `createAndAppend`. This is done via an optional third parameter, named `options`.
+- It extends the `createAndAppend` function with an ability to specify the `textContent` and any HTML attributes to the newly created element in a single call to `createAndAppend`. This is done via an optional third parameter, named `options`.
 
 #### createAndAppend
 
 The extended version of `createAndAppend` is shown below. The added third parameter `options` is optional. If you supply this parameter when calling `createAndAppend` it must be an object with HTML attribute names and values. If you don't supply it, the value of the `options` parameter is set to an empty object. This is what the (ES6) syntax `options = {}` does. So, what follows the `=` sign is _default_ value for `options`, i.e. assigned to the parameter if it is not provided when `createAnAppend` is called.
 
-As you can see, the `forEach` method iterates through all keys of the `options` object. If the name of a property key is `html` it assigns the property value to the `innerText` of the newly created HTML element. Otherwise the **property key** is assumed to be the name of an HTML attribute and the **property value** the value of that attribute. The `.setAttribute` method is then called using `key` and `value` as its parameters.
+As you can see, the `forEach` method iterates through all keys of the `options` object. If the name of a property key is `html` it assigns the property value to the `textContent` of the newly created HTML element. Otherwise the **property key** is assumed to be the name of an HTML attribute and the **property value** the value of that attribute. The `.setAttribute` method is then called using `key` and `value` as its parameters.
 
 ```js
 function createAndAppend(name, parent, options = {}) {
@@ -95,7 +95,7 @@ function createAndAppend(name, parent, options = {}) {
   Object.keys(options).forEach(key => {
     const value = options[key];
     if (key === 'text') {
-      elem.innerText = value;
+      elem.textContent = value;
     } else {
       elem.setAttribute(key, value);
     }
@@ -114,7 +114,7 @@ This call:
 
 1. creates a `<td>` element,
 2. appends it to its parent `tr` element,
-3. sets its innerText to `'Name:'`,
+3. sets its textContent to `'Name:'`,
 4. and set its `class` attribute to `'label'`.
 
 #### addRow

@@ -25,7 +25,7 @@
       const root = document.getElementById('root');
       const pre = document.createElement('pre');
       root.appendChild(pre);
-      pre.innerText = JSON.stringify(data, null, 2);
+      pre.textContent = JSON.stringify(data, null, 2);
     });
   }
 

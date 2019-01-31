@@ -14,7 +14,7 @@
     const root = document.getElementById('root');
     const div = document.createElement('div');
     div.className = 'utterance';
-    div.innerText = message;
+    div.textContent = message;
     root.appendChild(div);
   }
 
@@ -50,11 +50,13 @@
     await eat(hotFood);
   }
 
-  async function main() {
-    await synthesizer.initialize(render);
-    await say("It's lunch time!");
-    await eatLunch(campbellsTomatoSoup);
-    await say('Finished lunch.');
+  function main() {
+    document.getElementById('start').addEventListener('click', async () => {
+      await synthesizer.initialize(render);
+      await say("It's lunch time!");
+      await eatLunch(campbellsTomatoSoup);
+      await say('Finished lunch.');
+    });
   }
 
   window.onload = main;

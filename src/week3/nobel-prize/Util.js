@@ -14,7 +14,7 @@ class Util {
     Object.keys(options).forEach(key => {
       const value = options[key];
       if (key === 'text') {
-        elem.innerText = value;
+        elem.textContent = value;
       } else {
         elem.setAttribute(key, value);
       }

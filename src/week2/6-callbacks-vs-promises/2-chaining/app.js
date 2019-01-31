@@ -3,13 +3,13 @@ const main = ({ countryUrl, cityUrl, genderUrl }) => {
 
     const renderLaureate = (laureate, parent) => {
         var li = document.createElement('li');
-        li.innerText = `${laureate.firstname} ${laureate.surname}`;
+        li.textContent = `${laureate.firstname} ${laureate.surname}`;
         parent.appendChild(li);
     }
 
     const renderLaureates = (laureates, title) => {
         const h2 = document.createElement('h2');
-        h2.innerText = title;
+        h2.textContent = title;
         root.appendChild(h2);
 
         const ul = document.createElement('ul');

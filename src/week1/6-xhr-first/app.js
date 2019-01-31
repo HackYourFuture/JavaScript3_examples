@@ -26,7 +26,7 @@
       const li = document.createElement('li');
       ul.appendChild(li);
       li.className = 'list-item';
-      li.innerText = `Name: ${laureate.firstname} ${laureate.surname}`;
+      li.textContent = `Name: ${laureate.firstname} ${laureate.surname}`;
     });
   }
 

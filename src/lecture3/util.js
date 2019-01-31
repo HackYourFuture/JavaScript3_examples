@@ -24,7 +24,7 @@ function createAndAppend(name, parent, options = {}) {
   parent.appendChild(elem);
   for (const key of Object.keys(options)) {
     if (key === 'text') {
-      elem.innerText = options.text;
+      elem.textContent = options.text;
     } else {
       elem.setAttribute(key, options[key]);
     }
