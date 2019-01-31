@@ -2,7 +2,7 @@ const main = ({ countryUrl, cityUrl, genderUrl }) => {
   const root = document.getElementById('response');
 
   const renderLaureate = (laureate, parent) => {
-    var li = document.createElement('li');
+    const li = document.createElement('li');
     li.textContent = `${laureate.firstname} ${laureate.surname}`;
     parent.appendChild(li);
   };
@@ -20,7 +20,7 @@ const main = ({ countryUrl, cityUrl, genderUrl }) => {
   };
 
   const renderError = error => {
-    var p = document.createElement('p');
+    const p = document.createElement('p');
     p.textContent = `We got an error: ${error}!`;
     root.appendChild(p);
   };

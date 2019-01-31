@@ -2,10 +2,10 @@ const main = ({ countryUrl, cityUrl, genderUrl }) => {
     const root = document.getElementById('response');
 
     const renderLaureate = (laureate, parent) => {
-        var li = document.createElement('li');
+        const li = document.createElement('li');
         li.textContent = `${laureate.firstname} ${laureate.surname}`;
         parent.appendChild(li);
-    }
+    };
 
     const renderLaureates = (laureates, title) => {
         const h2 = document.createElement('h2');
@@ -17,7 +17,7 @@ const main = ({ countryUrl, cityUrl, genderUrl }) => {
             renderLaureate(laureate, ul);
         });
         root.appendChild(ul);
-    }
+    };
 
     const render = (error, response, title) => {
         if (error) {
@@ -25,7 +25,7 @@ const main = ({ countryUrl, cityUrl, genderUrl }) => {
         } else {
            renderLaureates(response.laureates, title);
         }
-    }
+    };
 
     const fetchJSON = (url, cb) => {
         const xhr = new XMLHttpRequest();
@@ -37,10 +37,10 @@ const main = ({ countryUrl, cityUrl, genderUrl }) => {
             } else {
                 cb(xhr.statusText);
             }
-        }
+        };
         xhr.onerror = () => cb('Network request failed');
         xhr.send();
-    }
+    };
 
     fetchJSON(countryUrl, (countryError, countryResponse) => {
         render(countryError, countryResponse, 'Laureates from Egypt');
@@ -57,7 +57,7 @@ const main = ({ countryUrl, cityUrl, genderUrl }) => {
             });
         }
     });
-}
+};
 
 const NOBEL_PRIZE_API_EGYPT_END_POINT = 'http://api.nobelprize.org/v1/laureate.json?bornCountryCode=EG';
 const NOBEL_PRIZE_API_ADAM_END_POINT = 'http://api.nobelprize.org/v1/laureate.json?bornCity=Amsterdam';

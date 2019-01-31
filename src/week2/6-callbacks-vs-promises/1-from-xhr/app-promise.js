@@ -13,7 +13,7 @@ const main = url => {
   const root = document.getElementById('response');
 
   const renderLaureate = (laureate, parent) => {
-    var li = document.createElement('li');
+    const li = document.createElement('li');
     li.textContent = `${laureate.firstname} ${laureate.surname}`;
     parent.appendChild(li);
   };

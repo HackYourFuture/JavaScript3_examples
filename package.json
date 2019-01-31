@@ -1,0 +1,22 @@
+{
+  "name": "javascript3_examples",
+  "version": "1.0.0",
+  "description": "- [Week 1](./src/week1/README.md) - [Week 2](./src/week2/README.md) - [Week 3](./src/week3/README.md) - [functions](./src/functions/README.md) - [this, call, apply, bind, new](./src/this-call-bind/README.md)",
+  "main": "prettier.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HackYourFuture/JavaScript3_examples.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HackYourFuture/JavaScript3_examples/issues"
+  },
+  "homepage": "https://github.com/HackYourFuture/JavaScript3_examples#readme",
+  "dependencies": {
+    "eslint": "^5.12.1"
+  }
+}
