@@ -16,7 +16,8 @@
     "url": "https://github.com/HackYourFuture/JavaScript3_examples/issues"
   },
   "homepage": "https://github.com/HackYourFuture/JavaScript3_examples#readme",
-  "dependencies": {
-    "eslint": "^5.12.1"
+  "devDependencies": {
+    "eslint": "^5.12.1",
+    "prettier": "1.16.3"
   }
 }
