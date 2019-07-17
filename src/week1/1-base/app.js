@@ -1,5 +1,5 @@
 /*
-  A bare bones example using XMLHTTPRequest.
+  A bare bones example using XMLHttpRequest.
 */
 
 'use strict';

@@ -15,6 +15,10 @@
   "rules": {
     "linebreak-style": "off",
     "strict": "off",
-    "no-console": "off"
+    "no-plusplus": "off",
+    "no-console": "off",
+    "prefer-destructuring": "off",
+    "func-names": "off",
+    "class-methods-use-this": "off"
   }
 }

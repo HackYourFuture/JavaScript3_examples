@@ -2,7 +2,7 @@
 
 ## Overview
 
-We are building a Single Page Application that uses the [Nobel Prize API](https://nobelprize.readme.io/docs/getting-started).
+We will be building a Single Page Application that uses the [Nobel Prize API](https://nobelprize.readme.io/docs/getting-started).
 
 New concepts covered during this lecture:
 
@@ -30,11 +30,23 @@ We will specifically be dealing with **server-side web APIs**:
 
 Watch this YouTube video [3.24 mins]: [What is an API?](https://www.youtube.com/watch?v=s7wmiS2mSXY)
 
-We will be using the Nobel Prize API at:
+## The Nobel Prize API
+
+In this lecture we will be using the Nobel Prize API at:
 
 > https://nobelprize.readme.io/docs/getting-started
 
 This API provides data that _"contains information about who has been awarded the Nobel Prize, when, in what prize category and the motivation, as well as basic information about the Nobel Laureates such as birth data and the affiliation at the time of the award."_
+
+You can try out the API by clicking the link provided above. For instance, to get data about all the female Nobel Prize laureates, press the `GET Laureate` button, scroll down on the resulting page and enter `json` on the **format** field and `female` on the **gender** field as shown in the figure below. Then press the green **Try it!** button.
+
+![nobel-prize-form](../../assets/nobel-prize-form.png)
+
+The JSON response will be as shown below.
+
+Note the URL field: we will be using similar URLs in the code examples to fetch JSON data from the Nobel Prize API.
+
+![nobel-prize-response](../../assets/nobel-prize-response.png)
 
 ## Code examples
 
