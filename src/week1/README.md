@@ -1,130 +1,54 @@
 # JavaScript 3 - Week 1
 
-## Preparations
+## Overview
 
-- Ensure that Node 8+ LTS is installed
-- Install recommended VSCode extensions and settings
-
-## Lecture
-
-### Content
-
-We are building a Single Page Application that uses the [Nobel Prize API](https://nobelprize.readme.io/).
+We are building a Single Page Application that uses the [Nobel Prize API](https://nobelprize.readme.io/docs/getting-started).
 
 New concepts covered during this lecture:
 
-- Creating a Single Page Application (SPA).
-- Calling a remote [API](https://medium.freecodecamp.org/what-is-an-api-in-english-please-b880a3214a82) with [XMLHttpRequest](https://github.com/HackYourFuture/fundamentals/blob/master/fundamentals/XMLHttpRequest.md).
+- Creating a Single Page Application (SPA)
+- Calling a server-side web API with [XMLHttpRequest](https://github.com/HackYourFuture/fundamentals/blob/master/fundamentals/XMLHttpRequest.md).
 - Using asynchronous callbacks in conjunction with XMLHttpRequest.
-- Applying the DRY principle ([Don't Repeat Yourself](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)) by creating utility functions that take care of much of the boring, repetitive work.
+- Applying the DRY principle ([Don't Repeat Yourself](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)) by creating functions that replace repetitive code.
+- Reducing the complexity of larger code blocks by extracting small code fragments into separate, appropriately named functions.
 
-Use the `live-coding` folder for all live coding.
+## What is an API?
 
-### 9-final
+> Google "[what is an api](https://www.google.nl/search?q=what+is+an+api&oq=what+is+an+api&aqs=chrome..69i57j69i60l3.2774j0j7&sourceid=chrome&ie=UTF-8)":
+>
+> **API**
+>
+> _noun_ `computing`
+>
+> a set of functions and procedures allowing the creation of applications that access the features or data of an operating system, application, or other service.
 
-- Show the final version as target for the end of the lecture.
+We will specifically be dealing with **server-side web APIs**:
 
-### 1-callback
+> _A server-side web API is a programmatic interface consisting of one or more publicly exposed endpoints to a defined request–response message system, typically expressed in JSON or XML, which is exposed via the web—most commonly by means of an HTTP-based web server._
+>
+> Source: [Wikipedia - Web API](https://en.wikipedia.org/wiki/Web_API)
 
-- Revisit (async) callbacks.
+Watch this YouTube video [3.24 mins]: [What is an API?](https://www.youtube.com/watch?v=s7wmiS2mSXY)
 
-### 2-xhr-base
+We will be using the Nobel Prize API at:
 
-- Explain what an API is: https://www.youtube.com/watch?v=s7wmiS2mSXY
-- [Todd Motto's Public APIs](https://github.com/toddmotto/public-apis)
-- Demo JSON View Chrome extension
-- [Awesome JSON Datasets](https://github.com/jdorfman/awesome-json-datasets)
-- Play with [Nobel Prize API](https://nobelprize.readme.io/)
-- Find documentation for XMLHttpRequest - Google: `mdn xmlhttprequest`
-- Mention AJAX
-- Explain that XMLHttpRequest is provided by the browser, not by JavaScript. It is not available in Node.
-- Demonstrate base version of XMLHttpRequest.
-- Open the Chrome Developer Tools and examine the console and the network tab.
-- Add a console.log to show the `readyState`.
-- Change the queryString to an unsupported value and demonstrate the error case.
+> https://nobelprize.readme.io/docs/getting-started
 
-### 3-xhr-callback
+This API provides data that _"contains information about who has been awarded the Nobel Prize, when, in what prize category and the motivation, as well as basic information about the Nobel Laureates such as birth data and the affiliation at the time of the award."_
 
-- Refactor code to create a reusable `fetchJSON` function taking a `url` and a callback.
+## Code examples
 
-### 4-xhr-render
-
-- Render the data as a `pre` tag showing the JSON data
-
-### 5-xhr-html
-
-- Show that HTML we want to create from the JSON data
-
-### 6-xhr-first
-
-- First version of rudimentary HTML
-
-### 7-xhr-dry
-
-- Create a `createAndAppend` function: DRY.
-- Explain that functions allow us to abstract away details so we can concentrate on the task at hand.
-- Explain the benefits of reusability.
-
-### 8-xhr-dryer
-
-- Demonstrate improved version of `createAndAppend`.
-
-### 9-xhr-table
-
-- Exploit `createAndAppend` to create more complex table structure.
-
-### 10-final
-
-This folder contains the finished version of the Nobel Prize SPA:
-
-- It adds styling through an external stylesheet (`style.css`), that is loaded via the `index.html` file.
-- It adds a `<select>` element that contains collection of queries that can be made against the Nobel Prize API.
-- It adds an event handler to the `change` event of the `<select>` element, so that a new XMLHttpRequest is made whenever the selection changes.
-- It extends the `createAndAppend` function with an ability to specify the `textContent` and any HTML attributes to the newly created element in a single call to `createAndAppend`. This is done via an optional third parameter, named `options`.
-
-#### createAndAppend
-
-The extended version of `createAndAppend` is shown below. The added third parameter `options` is optional. If you supply this parameter when calling `createAndAppend` it must be an object with HTML attribute names and values. If you don't supply it, the value of the `options` parameter is set to an empty object. This is what the (ES6) syntax `options = {}` does. So, what follows the `=` sign is _default_ value for `options`, i.e. assigned to the parameter if it is not provided when `createAnAppend` is called.
-
-As you can see, the `forEach` method iterates through all keys of the `options` object. If the name of a property key is `html` it assigns the property value to the `textContent` of the newly created HTML element. Otherwise the **property key** is assumed to be the name of an HTML attribute and the **property value** the value of that attribute. The `.setAttribute` method is then called using `key` and `value` as its parameters.
-
-```js
-function createAndAppend(name, parent, options = {}) {
-  const elem = document.createElement(name);
-  parent.appendChild(elem);
-  Object.keys(options).forEach(key => {
-    const value = options[key];
-    if (key === 'text') {
-      elem.textContent = value;
-    } else {
-      elem.setAttribute(key, value);
-    }
-  });
-  return elem;
-}
-```
-
-Here is an example of how the `createAndAppend` function can be called:
-
-```js
-createAndAppend('td', tr, { text: 'Name:', class: 'label' });
-```
-
-This call:
-
-1. creates a `<td>` element,
-2. appends it to its parent `tr` element,
-3. sets its textContent to `'Name:'`,
-4. and set its `class` attribute to `'label'`.
-
-#### addRow
-
-This is a small utility function that just adds a new row (`tr`) to a `tbody`. This is again an example of DRY: remove some of the repetition that we would otherwise have to make in our code: `less work === more fun` and `less work === fewer errors`!
-
-```js
-function addRow(tbody, label, value) {
-  const row = createAndAppend('tr', tbody);
-  createAndAppend('td', row, { text: label + ':', class: 'label' });
-  createAndAppend('td', row, { text: value });
-}
-```
+<!-- prettier-ignore -->
+| Folder       | Description |
+| ------------ | ----------- |
+| 1‑base       | A bare bones example using XMLHTTPRequest. |
+| 2‑function   | Extracts reusable code into a function that takes a URL and a callback parameter. |
+| 3‑json       | Sets the response type from default (text) to json. |
+| 4‑errors     | Add error handling using a node-style callback. |
+| 5‑render     | Render API data as JSON to the page using a `<pre>` tag. |
+| 6‑select     | Use DOM manipulation to create a `<select>` element and populate it with `<option>` elements using country data obtained from the Nobel Prize API. |
+| 7‑dry        | Apply the DRY principle by creating the `createAndAppend()`function to reduce repetitive code. |
+| 8‑dryer      | Enhance `createAndAppend()` to take optional text and attributes parameters. |
+| 9‑dryest     | Refine the `createAndAppend()` function signature (i.e. the parameter list). |
+| 10‑laureates | Fetch and render laureates for the select country. |
+| 11‑final     | Render laureate details and add CSS styling. |

@@ -18,46 +18,15 @@ function process(action, item, fail = false) {
   });
 }
 
-function processAll(processes) {
-  const promises = processes.map(process => process());
-  return Promise.all(promises);
-}
-
-function gatherIngredients() {
-  return process('gather', 'ingredients');
-}
-
-function cutTomatoes() {
-  return process('cut', 'tomatoes');
-}
-
-function cutGarlic() {
-  return process('cut', 'garlic');
-}
-
-function boilWater() {
-  return process('boil', 'water');
-}
-
-function cookPasta() {
-  return process('cook', 'pasta');
-}
-
-function fryGarlic() {
-  return process('fry', 'garlic', true);
-}
-
-function fryTomatoes() {
-  return process('fry', 'tomatoes');
-}
-
-function mixSauce() {
-  return process('mix', 'sauce');
-}
-
-function servePasta() {
-  return process('serve', 'pasta');
-}
+const gatherIngredients = () => process('gather', 'ingredients');
+const cutTomatoes = () => process('cut', 'tomatoes');
+const cutGarlic = () => process('cut', 'garlic');
+const boilWater = () => process('boil', 'water');
+const cookPasta = () => process('cook', 'pasta');
+const fryGarlic = () => process('fry', 'garlic', true);
+const fryTomatoes = () => process('fry', 'tomatoes');
+const mixSauce = () => process('mix', 'sauce');
+const servePasta = () => process('serve', 'pasta');
 
 function startIntervalTimer() {
   let elapsedSecs = 0;
@@ -75,8 +44,8 @@ function main() {
   gatherIngredients()
     .then(cutGarlic)
     .then(cutTomatoes)
-    .then(() => processAll([fryGarlic, fryTomatoes, boilWater]))
-    .then(() => processAll([mixSauce, cookPasta]))
+    .then(() => Promise.all([fryGarlic(), fryTomatoes(), boilWater()]))
+    .then(() => Promise.all([mixSauce(), cookPasta()]))
     .then(servePasta)
     .then(() => {
       clearInterval(timerId);
