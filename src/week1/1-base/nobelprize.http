@@ -1,0 +1,7 @@
+### All countries
+
+GET http://api.nobelprize.org/v1/country.json
+
+### All female laureates
+
+GET http://api.nobelprize.org/v1/laureate.json?gender=female

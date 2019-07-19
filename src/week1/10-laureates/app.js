@@ -1,5 +1,5 @@
 /*
-  Fetch and render laureates for the select country.
+  Fetch and render laureates for the selected country.
   Optional exercise: use country info from https://restcountries.eu/rest/v2/all
 */
 

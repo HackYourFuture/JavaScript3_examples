@@ -6,10 +6,10 @@ We will be building a Single Page Application that uses the [Nobel Prize API](ht
 
 New concepts covered during this lecture:
 
-- Creating a Single Page Application (SPA)
+- Creating a **Single Page Application** (SPA) (vs. a multi-page application)
 - Calling a server-side web API with [XMLHttpRequest](https://github.com/HackYourFuture/fundamentals/blob/master/fundamentals/XMLHttpRequest.md).
-- Using asynchronous callbacks in conjunction with XMLHttpRequest.
-- Applying the DRY principle ([Don't Repeat Yourself](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)) by creating functions that replace repetitive code.
+- Using asynchronous callbacks in conjunction with **XMLHttpRequest**.
+- Applying the **DRY** principle ([Don't Repeat Yourself](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)) by creating functions that replace repetitive code.
 - Reducing the complexity of larger code blocks by extracting small code fragments into separate, appropriately named functions.
 
 ## What is an API?
@@ -32,13 +32,13 @@ Watch this YouTube video [3.24 mins]: [What is an API?](https://www.youtube.com/
 
 ## The Nobel Prize API
 
-In this lecture we will be using the Nobel Prize API at:
+In this lecture we will be using the Nobel Prize API:
 
 > https://nobelprize.readme.io/docs/getting-started
 
 This API provides data that _"contains information about who has been awarded the Nobel Prize, when, in what prize category and the motivation, as well as basic information about the Nobel Laureates such as birth data and the affiliation at the time of the award."_
 
-You can try out the API by clicking the link provided above. For instance, to get data about all the female Nobel Prize laureates, press the `GET Laureate` button, scroll down on the resulting page and enter `json` on the **format** field and `female` on the **gender** field as shown in the figure below. Then press the green **Try it!** button.
+You can try out the API by clicking the link provided above. For instance, to get data about all the female Nobel Prize laureates, press the `GET Laureate` button, scroll down on the resulting page and enter `json` in the **format** field and `female` in the **gender** field, as shown in the figure below. Then press the green **Try it!** button.
 
 ![nobel-prize-form](../../assets/nobel-prize-form.png)
 
@@ -62,5 +62,5 @@ Note the URL field: we will be using similar URLs in the code examples to fetch 
 | 7‑dry        | Apply the DRY principle by creating the `createAndAppend()`function to reduce repetitive code. |
 | 8‑dryer      | Enhance `createAndAppend()` to take optional text and attributes parameters. |
 | 9‑dryest     | Refine the `createAndAppend()` function signature (i.e. the parameter list). |
-| 10‑laureates | Fetch and render laureates for the select country. |
+| 10‑laureates | Fetch and render laureates for the selected country. |
 | 11‑final     | Render laureate details and add CSS styling. |

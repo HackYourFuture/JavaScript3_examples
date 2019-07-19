@@ -10,53 +10,53 @@
 'use strict';
 
 {
-  console.log('entering block');
+  window.logger.enter('outer block');
 
   function fetchJSON(url, cb) {
-    console.log('entering fetchJSON');
+    window.logger.enter('fetchJSON');
 
     const xhr = new XMLHttpRequest();
     xhr.open('GET', url);
     xhr.responseType = 'json';
     xhr.onload = () => {
-      console.log('entering xhr.onload handler');
+      window.logger.enter('xhr.onload handler');
       if (xhr.status >= 200 && xhr.status <= 299) {
         cb(null, xhr.response);
       } else {
         cb(new Error(`Network error: ${xhr.status} - ${xhr.statusText}`));
       }
-      console.log('leaving xhr.onload handler');
+      window.logger.leave('xhr.onload handler');
     };
     xhr.onerror = () => {
-      console.log('entering onerror handler');
+      window.logger.enter('onerror handler');
       cb(new Error('Network request failed'));
-      console.log('leaving onerror handler');
+      window.logger.leave('onerror handler');
     };
     xhr.send();
 
-    console.log('leaving fetchJSON');
+    window.logger.leave('fetchJSON');
   }
 
   function fetchAndRender(url) {
-    console.log('entering fetchAndRender');
+    window.logger.enter('fetchAndRender');
 
     const pre = document.getElementById('response');
     fetchJSON(url, (err, data) => {
-      console.log('entering fetchJSON callback');
+      window.logger.enter('fetchJSON callback');
       pre.textContent = err ? err.message : JSON.stringify(data, null, 2);
-      console.log('leaving fetchJSON callback');
+      window.logger.leave('fetchJSON callback');
     });
 
-    console.log('leaving fetchAndRender');
+    window.logger.leave('fetchAndRender');
   }
 
   function main(url) {
-    console.log('entering main');
+    window.logger.enter('main');
     const button = document.getElementById('btn-go');
     button.addEventListener('click', () => {
-      console.log('entering onclick handler');
+      window.logger.enter('onclick handler');
       fetchAndRender(url);
-      console.log('leaving onclick handler');
+      window.logger.leave('onclick handler');
     });
 
     const span = document.getElementById('counter');
@@ -67,16 +67,16 @@
       span.textContent = counter;
     }, 200);
 
-    console.log('leaving main');
+    window.logger.leave('main');
   }
 
   const NOBEL_PRIZE_API_END_POINT = 'http://api.nobelprize.org/v1/laureate.json?gender=female';
 
   window.onload = () => {
-    console.log('entering window.onload handler');
+    window.logger.enter('window.onload handler');
     main(NOBEL_PRIZE_API_END_POINT);
-    console.log('leaving window.onload handler');
+    window.logger.leave('window.onload handler');
   };
 
-  console.log('leaving block');
+  window.logger.leave('outer block');
 }
