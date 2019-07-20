@@ -9,14 +9,14 @@
     xhr.send();
   }
 
+  function handleChangeCategory(category) {
+    const url = `http://api.nobelprize.org/v1/prize.json?category=${category}`;
+    console.log('url', url);
+  }
+
   function main() {
     const select = document.getElementById('select-category');
-    const ul = document.getElementById('prize-list-container');
-
-    select.addEventListener('change', () => {
-      const url = `http://api.nobelprize.org/v1/prize.json?category=${select.value}`;
-      console.log('url', url);
-    });
+    select.addEventListener('change', () => handleChangeCategory(select.value));
   }
 
   window.onload = main;
