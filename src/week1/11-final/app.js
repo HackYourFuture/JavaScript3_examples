@@ -78,9 +78,9 @@
       const table = createAndAppend('table', div);
       const tbody = createAndAppend('tbody', table);
       addRow(tbody, 'Name', `${firstname} ${surname || ''} `);
-      addRow(tbody, 'Born', `${laureate.born}, ${laureate.bornCountry}`);
+      addRow(tbody, 'Born', `${laureate.born}, ${laureate.bornCity}, ${laureate.bornCountry}`);
       if (laureate.died !== '0000-00-00') {
-        addRow(tbody, 'Died', `${laureate.died}, ${laureate.diedCountry}`);
+        addRow(tbody, 'Died', `${laureate.died}, ${laureate.diedCity}, ${laureate.diedCountry}`);
       }
       renderLaureatePrizes(tbody, laureate.prizes);
     });

@@ -1,0 +1,16 @@
+### Nobel Prize API - All countries
+
+GET http://api.nobelprize.org/v1/country.json
+
+### Nobel Prize API - All female laureates
+
+GET http://api.nobelprize.org/v1/laureate.json?gender=female
+
+### Exchange rates against EUR
+
+GET https://api.exchangerate-api.com/v4/latest/EUR
+
+
+### Eat & Drink Amsterdam
+
+GET https://open.data.amsterdam.nl/EtenDrinken.json
