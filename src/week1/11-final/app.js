@@ -86,10 +86,10 @@
     });
   }
 
-  function onChangeSelect(countryCode, listContainer) {
+  function onChangeSelect(country, listContainer) {
     clearContainer(listContainer);
 
-    fetchJSON(`${API_BASE_URL}/laureate.json?bornCountryCode=${countryCode}`, (err, data) => {
+    fetchJSON(`${API_BASE_URL}/laureate.json?bornCountry=${country}`, (err, data) => {
       if (err) {
         renderError(err);
         return;
@@ -119,14 +119,17 @@
 
       data.countries
         .sort((a, b) => a.name.localeCompare(b.name))
-        .forEach(country => {
+        .forEach((country, index) => {
           createAndAppend('option', select, {
             text: country.name,
-            value: country.code,
+            value: index,
           });
         });
 
-      select.addEventListener('change', () => onChangeSelect(select.value, listContainer));
+      select.addEventListener('change', () => {
+        const { name } = data.countries[select.value];
+        onChangeSelect(name, listContainer);
+      });
     });
   }
 

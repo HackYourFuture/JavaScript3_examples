@@ -20,6 +20,7 @@
     "prefer-destructuring": "off",
     "func-names": "off",
     "class-methods-use-this": "off",
-    "prefer-template": "off"
+    "prefer-template": "off",
+    "no-param-reassign": "off"
   }
 }

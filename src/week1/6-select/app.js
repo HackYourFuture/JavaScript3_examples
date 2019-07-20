@@ -34,18 +34,19 @@
       const select = document.createElement('select');
       root.appendChild(select);
 
-      data.countries.forEach(country => {
+      data.countries.forEach((country, index) => {
         const option = document.createElement('option');
-        option.setAttribute('value', country.code);
+        option.setAttribute('value', index);
         option.textContent = country.name;
         select.appendChild(option);
       });
 
-      const countryCodeContainer = document.createElement('p');
-      root.appendChild(countryCodeContainer);
+      const p = document.createElement('p');
+      root.appendChild(p);
 
       select.addEventListener('change', () => {
-        countryCodeContainer.textContent = `Country code: ${select.value}`;
+        const country = data.countries[select.value].name;
+        p.textContent = country;
       });
     });
   }

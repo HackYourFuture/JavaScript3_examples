@@ -1,6 +1,5 @@
 /*
   Fetch and render laureates for the selected country.
-  Optional exercise: use country info from https://restcountries.eu/rest/v2/all
 */
 
 'use strict';
@@ -37,11 +36,10 @@
     return elem;
   }
 
-  function onChangeSelect(countryCode, listContainer) {
-    // eslint-disable-next-line no-param-reassign
+  function onChangeSelect(country, listContainer) {
     listContainer.innerHTML = '';
 
-    fetchJSON(`${API_BASE_URL}/laureate.json?bornCountryCode=${countryCode}`, (err, data) => {
+    fetchJSON(`${API_BASE_URL}/laureate.json?bornCountry=${country}`, (err, data) => {
       if (err) {
         const root = document.getElementById('root');
         createAndAppend('div', root, { text: err.message });
@@ -71,11 +69,17 @@
       });
 
       const countries = data.countries.sort((a, b) => a.name.localeCompare(b.name));
-      countries.forEach(country => {
-        createAndAppend('option', select, { text: country.name, value: country.code });
+      countries.forEach((country, index) => {
+        createAndAppend('option', select, {
+          text: country.name,
+          value: index,
+        });
       });
 
-      select.addEventListener('change', () => onChangeSelect(select.value, listContainer));
+      select.addEventListener('change', () => {
+        const country = data.countries[select.value].name;
+        onChangeSelect(country, listContainer);
+      });
     });
   }
 

@@ -40,16 +40,17 @@
       const select = createAndAppend('select', root);
 
       const countries = data.countries.sort((a, b) => a.name.localeCompare(b.name));
-      countries.forEach(country => {
+      countries.forEach((country, index) => {
         const option = createAndAppend('option', select);
-        option.setAttribute('value', country.code);
+        option.setAttribute('value', index);
         option.textContent = country.name;
       });
 
-      const countryCode = createAndAppend('p', root);
+      const p = createAndAppend('p', root);
 
       select.addEventListener('change', () => {
-        countryCode.textContent = `Country code: ${select.value}`;
+        const country = data.countries[select.value].name;
+        p.textContent = country;
       });
     });
   }

@@ -55,14 +55,18 @@
       });
 
       const countries = data.countries.sort((a, b) => a.name.localeCompare(b.name));
-      countries.forEach(country => {
-        createAndAppend('option', select, { text: country.name, value: country.code });
+      countries.forEach((country, index) => {
+        createAndAppend('option', select, {
+          text: country.name,
+          value: index,
+        });
       });
 
-      const countryCode = createAndAppend('p', root);
+      const p = createAndAppend('p', root);
 
       select.addEventListener('change', () => {
-        countryCode.textContent = `Country code: ${select.value}`;
+        const country = data.countries[select.value].name;
+        p.textContent = country;
       });
     });
   }
