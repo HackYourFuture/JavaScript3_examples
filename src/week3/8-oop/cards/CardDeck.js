@@ -1,4 +1,4 @@
-/* global createAndAppend */
+/* global createAndAppend, createCard */
 
 'use strict';
 
@@ -16,7 +16,7 @@
     constructor() {
       this.allCards = [];
       CARD_SUITS.forEach(suit => {
-        const suitCards = CARD_RANKS.map(rank => window.createCard(suit.symbol, suit.color, rank));
+        const suitCards = CARD_RANKS.map(rank => createCard(suit.symbol, suit.color, rank));
         this.allCards = this.allCards.concat(suitCards);
       });
       this.cards = this.allCards.slice();

@@ -1,3 +1,6 @@
+/* eslint-disable new-cap */
+/* eslint-disable no-new */
+
 // see effect on this when next line is commented out
 
 'use strict';

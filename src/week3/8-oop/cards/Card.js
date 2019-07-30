@@ -1,5 +1,7 @@
 'use strict';
 
+/* global createAndAppend */
+
 {
   const getCardHtml = (rank, symbol) => `
     <div class='card-row row-top'>
@@ -31,7 +33,7 @@
     }
 
     render(container) {
-      const cardContainer = window.createAndAppend('div', container, {
+      const cardContainer = createAndAppend('div', container, {
         class: 'card-container',
         style: `color: ${this.color}`,
       });
