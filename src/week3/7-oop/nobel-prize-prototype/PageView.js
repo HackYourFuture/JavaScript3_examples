@@ -71,10 +71,10 @@
     });
     laureates.forEach(laureate => {
       const { surname, firstname } = laureate;
-      const div = this.createAndAppend('li', ul, {
+      const li = this.createAndAppend('li', ul, {
         class: 'list-item',
       });
-      const table = this.createAndAppend('table', div);
+      const table = this.createAndAppend('table', li);
       const tbody = this.createAndAppend('tbody', table);
       this.addRow(tbody, 'Name', `${firstname} ${surname || ''} `);
       this.addRow(
