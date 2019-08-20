@@ -17,7 +17,7 @@ The application is now divided into three component types:
 | Component | Description |
 | --------- | ----------- |
 | **App**   | The top-level, 'main' component that represents the whole application. |
-| **Model** | A Model component tahr is responsible for fetching data on request of the View component and that notifies the Views when the data is available. |
+| **Model** | A Model component that is responsible for fetching data on request of the View component and that notifies the Views when the data is available. |
 | **View**  | The View component listens for updates from the Model component and renders the updates to its medium, e.g. a Web page. |
 
 >Note that, using this architecture, there can be multiple Views listening to updates from the Model, as we will demo in this example.
@@ -55,7 +55,7 @@ In this application, we have provided a main View (called **PageView** below) an
 | index.html | The application's single HTML page. |
 | style.css | Contains the CSS styling. |
 | App.js | A JavaScript class that implements to the top-level component of the application. |
-| Model.js | A JavaScript class hat implements the Model functionality. |
+| Model.js | A JavaScript class that implements the Model functionality. |
 | PageView.js | A JavaScript class that implements the View functionality, rendering the Model data as HTML elements in the web page. |
 | ConsoleView.js |  A JavaScript class that implements a (passive) View. It simply logs the Model data to the browser console. |
 | SpeechView.js | A JavaScript class that implements a (passive) View, rendering a summary of the Model data as spoken text. |
