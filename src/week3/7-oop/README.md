@@ -12,23 +12,39 @@ Watch Brad Traversy's [JavaScript OOP Crash Course (ES5 & ES6)](https://www.yout
 
 This example builds on the Nobel Prize API example of week 1. Its purpose is to demonstrate the application of Object Oriented Programming, using older-style prototype-based JavaScript objects and the newer ES6 classes.
 
-This design is loosely based on the classic [Model-View-Controller](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) (MVC) pattern, however, without a separate Controller component.
+The application is now divided into three component types:
 
 | Component | Description |
 | --------- | ----------- |
-| **Model** | The Model is responsible for fetching data on request of a View and notifies the attached Views when the data is updated. |
-| **View**  | The View subscribes to updates from the Model and renders the updates to its medium, e.g. a Web page.  |
+| **App**   | The top-level, 'main' component that represents the whole application. |
+| **Model** | A Model component tahr is responsible for fetching data on request of the View component and that notifies the Views when the data is available. |
+| **View**  | The View component listens for updates from the Model component and renders the updates to its medium, e.g. a Web page. |
+
+>Note that, using this architecture, there can be multiple Views listening to updates from the Model, as we will demo in this example.
 
  A key benefit of this organization is the [Separation of Concerns](https://en.wikipedia.org/wiki/Separation_of_concerns):
 
 - The Model is concerned with fetching data and notifying attached Views when data is updated. It is not concerned with rendering the data.
 - The View is concerned with rendering the data and responding to DOM events. It not concerned with fetching the data.
-- The Controller provides an isolation layer between the View and the Model.
+
+Because this pattern of a _source_ component (our Model) needing notifying _client_ component(s) (our View) about updates is so common, this base functionality often implemented in reusable classes, usually called **Subject** and **Observer**. We can use **class inheritance** to let the Model inherit the Subject functionality and, similarly, let the View class inherit the functionality of the Observer class. This is illustrated in Figure 1 below. 
 
 ![HYF-MVC](./HYF-MVC.png)
 
-Figure 1. A UML Class Diagram for the MVC Pattern as implemented here.<br>
+Figure 1. A UML Class Diagram illustrating the 'Observer' pattern.<br>
 (Created with **LucidChart**: [YouTube tutorial](https://youtu.be/UI6lqHOVHic) 10 mins.)
+
+In this diagram, an arrow with closed triangle arrowhead signifies an inheritance relationship, whereas a open arrowhead represents a reference. For example, the Model class inherits from the Subject class and the View class inherits from the Observer class. In this particular example, in OOP parlance, the Subject class is said to be the **superclass** of the Model class, and the Model class is a **subclass** of the Subject class. The same can be said for Observer and View classes. In ES6 classes, inheritance is indicated with the `extends` keyword.
+
+```js
+class Model extends Subject {
+  ...
+}
+
+class View extends Observer {
+  ...
+}
+```
 
 ### Application Files
 
@@ -39,7 +55,7 @@ In this application, we have provided a main View (called **PageView** below) an
 | index.html | The application's single HTML page. |
 | style.css | Contains the CSS styling. |
 | App.js | A JavaScript class that implements to the top-level component of the application. |
-| Model.js | A JavaScript class hat implements the Model functionality. It inherits from (`extends`) the Observer class. |
+| Model.js | A JavaScript class hat implements the Model functionality. |
 | PageView.js | A JavaScript class that implements the View functionality, rendering the Model data as HTML elements in the web page. |
 | ConsoleView.js |  A JavaScript class that implements a (passive) View. It simply logs the Model data to the browser console. |
 | SpeechView.js | A JavaScript class that implements a (passive) View, rendering a summary of the Model data as spoken text. |
