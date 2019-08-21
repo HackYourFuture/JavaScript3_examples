@@ -26,8 +26,12 @@ Magazine.prototype = Object.create(Book.prototype);
 // Use Magazine Constructor
 Magazine.prototype.constructor = Magazine;
 
+Magazine.prototype.updateMonth = function(month) {
+  this.month = month;
+};
+
 // Instantiate Magazine Object
-const mag1 = new Magazine('Mag One', 'Jon Doe', 2018, 'Jan');
+const mag1 = new Magazine('Mag One', 'John Doe', 2018, 'Jan');
 
 console.log(mag1);
 console.log(mag1.getSummary());

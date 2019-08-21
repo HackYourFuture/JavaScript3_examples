@@ -15,4 +15,6 @@ const book2 = new Book('Book Two', 'Jane Doe', 2016);
 console.log(book1.getSummary());
 console.log(book2.getSummary());
 
-console.log(book2);
+console.log(book1);
+
+book1.turnPage();

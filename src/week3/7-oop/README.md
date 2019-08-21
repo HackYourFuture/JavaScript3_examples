@@ -25,7 +25,7 @@ The application is now divided into three component types:
  A key benefit of this organization is the [Separation of Concerns](https://en.wikipedia.org/wiki/Separation_of_concerns):
 
 - The Model is concerned with fetching data and notifying attached Views when data is updated. It is not concerned with rendering the data.
-- The View is concerned with rendering the data and responding to DOM events. It not concerned with fetching the data.
+- The View is concerned with rendering the data as provided by the Model and with responding to DOM events. It not concerned with fetching the data.
 
 Because this pattern of a _source_ component (our Model) needing notifying _client_ component(s) (our View) about updates is so common, this base functionality often implemented in reusable classes, usually called **Subject** and **Observer**. We can use **class inheritance** to let the Model inherit the Subject functionality and, similarly, let the View class inherit the functionality of the Observer class. This is illustrated in Figure 1 below. 
 

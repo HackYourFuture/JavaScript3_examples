@@ -22,6 +22,7 @@
     "class-methods-use-this": "off",
     "prefer-template": "off",
     "no-param-reassign": "off",
-    "object-shorthand": "off"
+    "object-shorthand": "off",
+    "max-classes-per-file": "off"
   }
 }
