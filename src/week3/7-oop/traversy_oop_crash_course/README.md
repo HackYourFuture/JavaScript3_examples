@@ -4,7 +4,9 @@ This README is a companion to Brad Traversy's YouTube [JavaScript OOP Crash Cour
 
 Note that it is not necessary in your daily programming to have full knowledge of all the finer details of prototypal inheritance. As can be seen in this document those details can quickly become rather complex. An overall awareness of the concept of a **prototype** chain as the underlying infrastructure for supporting inheritance will suffice.
 
-> The names of the sections below correspond to the equally named JavaScript example files.
+What _is_ important is that you understand the **ES6 class syntax** and how to implement a **class inheritance** with the  **extends** keyword (see **6_classes** and **7_subclasses** below).
+
+>Note: The names of the sections below correspond to the equally named JavaScript example files.
 
 ## 1_basics_literals
 
@@ -121,7 +123,7 @@ Book {title: "Book One", author: "John Doe", year: 2013}
 
 ## 4_inheritance
 
-An object can inherit behaviour from another object through prototypal linkage. In this example, a **Magazine** object becomes  an extended version of a **Book** object.
+An object can inherit behaviour from another object through prototypal linkage. In this example, a **Magazine** object becomes  an extended version of a **Book** object. All methods from the base object are also accessible from the inheriting object and both object use a shared **this** value.
 
 ```js
 function Book(title, author, year) {
@@ -318,6 +320,8 @@ class Magazine extends Book {
 
 const mag1 = new Magazine('Mag One', 'John Doe', 2018, 'Jan');
 ```
+
+In OOP parlance, the class that inherits from the base class (in this example, **Magazine**) is called a **subclass** of the class it extends. The base class itself (here, **Book**) is called the **superclass**.
 
 ![7_subclasses](./assets/7_subclasses.png)
 Figure 6. ES6 class-based inheritance: `extends`.
