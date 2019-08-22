@@ -158,7 +158,7 @@ Firstly, remember that when a function is called with `new`, its `this` value is
 
 In order to initialize the base object (in this example **Book**), its constructor function must be called, with the `this` value set to that of the calling constructor (here, **Magazine**).
 
-This is done with the `Function.prototype.call()` method (see Figure 4 below), passing the `this` value of the calling constructor as its first argument. If the called constructor expects arguments they are passed as additional arguments following the `this` value. In this example, the called constructor for **Book** expects the arguments `title`, `author` and `year`.
+This is done with the [Function.prototype.call()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call) method (see Figure 4 below), passing the `this` value of the calling constructor as its first argument. If the called constructor expects arguments they are passed as additional arguments following the `this` value. In this example, the called constructor for **Book** expects the arguments `title`, `author` and `year`.
 
 ```js
 function Magazine(title, author, year, month) {
@@ -167,7 +167,7 @@ function Magazine(title, author, year, month) {
 }
 ```
 
-Next, the prototype of the calling constructor must be linked to the called constructor. This is done with the help of [`Object.create`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create).
+Next, the prototype of the calling constructor must be linked to the called constructor. This is done with the help of [Object.create()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create).
 
 ```js
 Magazine.prototype = Object.create(Book.prototype);
