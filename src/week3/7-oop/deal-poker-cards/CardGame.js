@@ -1,10 +1,21 @@
-/* global createAndAppend */
-
 'use strict';
 
 {
   const DEAL_COUNT = 5;
-  const DEAL_LABELS = ['1ST', '2ND', '3RD', '4TH', '5TH', '6TH', '7TH', '8TH', '9TH', '10TH'];
+  const DEAL_LABELS = [
+    '1ST',
+    '2ND',
+    '3RD',
+    '4TH',
+    '5TH',
+    '6TH',
+    '7TH',
+    '8TH',
+    '9TH',
+    '10TH',
+  ];
+
+  const { createAndAppend } = window.Util;
 
   class CardGame {
     constructor(cardDeck) {
@@ -65,5 +76,5 @@
     }
   }
 
-  window.createCardGame = cardDeck => new CardGame(cardDeck);
+  window.CardGame = CardGame;
 }
