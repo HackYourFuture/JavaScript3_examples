@@ -7,9 +7,6 @@
     }
 
     subscribe(observer = {}) {
-      if (!(typeof observer.update === 'function')) {
-        throw new Error(`Observer must implement an 'update' method.`);
-      }
       this.observers.add(observer);
       return () => this.observers.delete(observer);
     }
