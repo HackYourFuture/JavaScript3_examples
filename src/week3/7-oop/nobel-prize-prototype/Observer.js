@@ -2,7 +2,7 @@
 
 {
   function Observer(subject) {
-    subject.register(this);
+    subject.subscribe(this);
   }
 
   window.Observer = Observer;

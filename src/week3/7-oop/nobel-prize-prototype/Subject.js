@@ -5,7 +5,7 @@
     this.observers = new Set();
   }
 
-  Subject.prototype.register = function(observer = {}) {
+  Subject.prototype.subscribe = function(observer = {}) {
     if (!(typeof observer.update === 'function')) {
       throw new Error(`Observer must implement an 'update' method.`);
     }

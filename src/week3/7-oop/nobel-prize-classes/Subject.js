@@ -6,7 +6,7 @@
       this.observers = new Set();
     }
 
-    register(observer = {}) {
+    subscribe(observer = {}) {
       if (!(typeof observer.update === 'function')) {
         throw new Error(`Observer must implement an 'update' method.`);
       }

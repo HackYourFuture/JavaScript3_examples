@@ -3,7 +3,7 @@
 {
   class Observer {
     constructor(subject) {
-      subject.register(this);
+      subject.subscribe(this);
     }
   }
 

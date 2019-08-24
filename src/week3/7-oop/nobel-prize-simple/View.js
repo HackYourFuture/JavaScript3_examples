@@ -5,7 +5,7 @@
 {
   class View {
     constructor(model) {
-      model.register(this);
+      model.subscribe(this);
       this.root = document.getElementById('root');
       model.fetchData();
     }

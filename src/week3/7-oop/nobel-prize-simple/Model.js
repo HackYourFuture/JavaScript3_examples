@@ -14,7 +14,7 @@
       };
     }
 
-    register(view) {
+    subscribe(view) {
       this.views.push(view);
     }
 
