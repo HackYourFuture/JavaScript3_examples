@@ -6,13 +6,13 @@
       this.observers = new Set();
     }
 
-    subscribe(observer = {}) {
+    subscribe(observer) {
       this.observers.add(observer);
       return () => this.observers.delete(observer);
     }
 
-    notify(payload) {
-      this.observers.forEach(observer => observer.update(payload));
+    notify(data) {
+      this.observers.forEach(observer => observer.update(data));
     }
   }
 

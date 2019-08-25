@@ -4,7 +4,7 @@
 
 {
   class View {
-    createAndAppend(name, parent, options = {}) {
+    static createAndAppend(name, parent, options = {}) {
       const elem = document.createElement(name);
       parent.appendChild(elem);
       Object.entries(options).forEach(([key, value]) => {

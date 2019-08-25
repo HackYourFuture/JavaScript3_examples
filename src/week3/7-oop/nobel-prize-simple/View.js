@@ -23,11 +23,11 @@
 
     renderLaureates(laureates) {
       const root = document.getElementById('root');
-      const ul = this.createAndAppend('ul', root, {
+      const ul = View.createAndAppend('ul', root, {
         id: 'list-container',
       });
       laureates.forEach(laureate => {
-        this.createAndAppend('li', ul, {
+        View.createAndAppend('li', ul, {
           class: 'list-item',
           text: `${laureate.firstname} ${laureate.surname || ''}`,
         });
@@ -35,14 +35,13 @@
     }
 
     renderError(err) {
-      this.mainContainer.innerHTML = '';
-      this.createAndAppend('div', this.mainContainer, {
+      View.createAndAppend('div', this.root, {
         text: err.message,
         class: 'alert alert-error',
       });
     }
 
-    createAndAppend(name, parent, options = {}) {
+    static createAndAppend(name, parent, options = {}) {
       const elem = document.createElement(name);
       parent.appendChild(elem);
       Object.entries(options).forEach(([key, value]) => {
