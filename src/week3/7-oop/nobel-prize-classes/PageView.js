@@ -1,11 +1,9 @@
 'use strict';
 
 {
-  const { Observer } = window;
-
-  class PageView extends Observer {
+  class PageView {
     constructor(model) {
-      super(model);
+      model.subscribe(this);
       this.model = model;
       this.header = null;
       this.select = null;

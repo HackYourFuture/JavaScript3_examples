@@ -1,11 +1,9 @@
 'use strict';
 
 {
-  const { Observer } = window;
-
-  class SpeechView extends Observer {
+  class SpeechView {
     constructor(model, lang) {
-      super(model);
+      model.subscribe(this);
       this.count = 0;
       this.lang = lang;
       this.utterance = null;

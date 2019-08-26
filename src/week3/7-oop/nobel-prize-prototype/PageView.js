@@ -1,19 +1,14 @@
 'use strict';
 
 {
-  const { Observer } = window;
-
   function PageView(model) {
-    Observer.call(this, model);
+    model.subscribe(this);
     this.model = model;
     this.header = null;
     this.select = null;
     this.mainContainer = null;
     this.initialize();
   }
-
-  PageView.prototype = Object.create(Observer.prototype);
-  PageView.prototype.constructor = PageView;
 
   PageView.prototype.initialize = function() {
     const root = document.getElementById('root');

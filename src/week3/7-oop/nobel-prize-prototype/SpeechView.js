@@ -1,18 +1,13 @@
 'use strict';
 
 {
-  const { Observer } = window;
-
   function SpeechView(model, lang) {
-    Observer.call(this, model);
+    model.subscribe(this);
     this.count = 0;
     this.lang = lang;
     this.utterance = null;
     this.voices = null;
   }
-
-  SpeechView.prototype = Object.create(Observer.prototype);
-  SpeechView.prototype.constructor = SpeechView;
 
   SpeechView.prototype.update = async function(state) {
     const { error, selectedCountry, laureates } = state;

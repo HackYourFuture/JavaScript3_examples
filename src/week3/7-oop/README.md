@@ -29,22 +29,26 @@ The application is now divided into three component types:
 - The Model is concerned with fetching data and notifying attached Views when data is updated. It is not concerned with rendering the data.
 - The View is concerned with rendering the data as provided by the Model and with responding to DOM events. It not concerned with fetching the data.
 
-Because this pattern of a _source_ component (our Model) needing notifying _client_ component(s) (our View) about updates is so common, this base functionality often implemented in reusable classes, usually called **Observable** and **Observer**. We can use **class inheritance** to let the Model inherit the Observable functionality and, similarly, let the View class inherit the functionality of the Observer class. This is illustrated in Figure 1 below. 
+Because this pattern of a _source_ component (our Model) needing notifying _client_ component(s) (our View) about updates is so common, this base functionality often implemented in a reusable class, usually called **Subject** or **Observable**. We can use **class inheritance** to let the Model inherit the Observable functionality. The View class must implement the interface expected by hhe Observable, in this example it must implement an `update()` method. This is illustrated in Figure 1 below. 
 
 ![model-view](./model-view.png)
 
 Figure 1. A UML Class Diagram illustrating the 'Observer' pattern.<br>
 (Created with **LucidChart**: [YouTube tutorial](https://youtu.be/UI6lqHOVHic) 10 mins.)
 
-In this diagram, an arrow with closed triangle arrowhead signifies an inheritance relationship, whereas a open arrowhead represents a reference. For example, the Model class inherits from the Observable class and the View class inherits from the Observer class. In this particular example, in OOP parlance, the Observable class is said to be the **superclass** of the Model class, and the Model class is a **subclass** of the Observable class. The same can be said for Observer and View classes. In ES6 classes, inheritance is indicated with the `extends` keyword.
+In this diagram, a solid line with closed arrowhead signifies an _inheritance_ relationship, a dashed line with closed arrowhead signifies an _'interface'_ whereas a solid line with an open arrowhead represents a _reference_. For example, the Model class inherits from the Observable class and the View class implements the IObserver interface. In OOP parlance, the Observable class is said to be the **superclass** of the Model class, and the Model class is a **subclass** of the Observable class. Contrary to most other OOP languages, there no construct in JavaScript to describe an interface in code. It is just used as a documentation vehicle.
 
 ```js
 class Model extends Observable {
   ...
 }
 
-class View extends Observer {
+class View {
   ...
+  // Implement the update method
+  update() {
+    //...
+  }
 }
 ```
 
@@ -62,7 +66,6 @@ In this application, we have provided a main View (called **PageView** below) an
 | ConsoleView.js |  A JavaScript class that implements a (passive) View. It simply logs the Model data to the browser console. |
 | SpeechView.js | A JavaScript class that implements a (passive) View, rendering a summary of the Model data as spoken text. |
 | Observable.js | A JavaScript class that implements the Observable component of the [Observer pattern](https://en.wikipedia.org/wiki/Observer_pattern). |
-| Observer.js | A JavaScript class that implements the Observer component of the Observer pattern. |
 
 ### Example Folders
 

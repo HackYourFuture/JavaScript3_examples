@@ -3,9 +3,11 @@
 'use strict';
 
 {
-  const { Observer } = window;
+  class ConsoleView {
+    constructor(model) {
+      model.subscribe(this);
+    }
 
-  class ConsoleView extends Observer {
     update(state) {
       console.log(state);
     }
