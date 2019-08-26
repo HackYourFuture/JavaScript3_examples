@@ -1,12 +1,12 @@
 'use strict';
 
 {
-  const { Subject } = window;
+  const { Observable } = window;
 
   const API_BASE_URL = 'http://api.nobelprize.org/v1';
 
   function Model() {
-    Subject.call(this);
+    Observable.call(this);
     this.state = {
       countries: [],
       selectedCountry: null,
@@ -15,31 +15,30 @@
     };
   }
 
-  Model.prototype = Object.create(Subject.prototype);
+  Model.prototype = Object.create(Observable.prototype);
   Model.prototype.constructor = Model;
 
   Model.prototype.fetchData = async function(selectedIndex) {
-    const newState = { ...this.state, error: null };
+    this.state.error = null;
     try {
       if (this.state.countries.length === 0) {
         const { countries } = await Model.fetchJSON(
           `${API_BASE_URL}/country.json`,
         );
-        newState.countries = countries.sort((a, b) =>
+        this.state.countries = countries.sort((a, b) =>
           a.name.localeCompare(b.name),
         );
       }
       if (selectedIndex !== undefined) {
-        newState.selectedCountry = newState.countries[selectedIndex];
+        this.state.selectedCountry = this.state.countries[selectedIndex];
         const { laureates } = await Model.fetchJSON(
-          `${API_BASE_URL}/laureate.json?bornCountry=${newState.selectedCountry.name}`,
+          `${API_BASE_URL}/laureate.json?bornCountry=${this.state.selectedCountry.name}`,
         );
-        newState.laureates = laureates;
+        this.state.laureates = laureates;
       }
     } catch (err) {
-      newState.error = err;
+      this.state.error = err;
     }
-    this.state = newState;
     this.notify(this.state);
   };
 

@@ -1,7 +1,7 @@
 'use strict';
 
 {
-  class Subject {
+  class Observable {
     constructor() {
       this.observers = new Set();
     }
@@ -16,5 +16,5 @@
     }
   }
 
-  window.Subject = Subject;
+  window.Observable = Observable;
 }
