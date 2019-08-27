@@ -2,9 +2,7 @@
 
 {
   class SpeechView {
-    constructor(model, lang) {
-      model.subscribe(this);
-      this.count = 0;
+    constructor(lang) {
       this.lang = lang;
       this.utterance = null;
       this.voices = null;
@@ -25,7 +23,7 @@
         this.speak(
           `There ${chunks[0]} ${laureates.length} laureate${
             chunks[1]
-          } in ${former} ${selectedCountry.name}.`,
+          } born in ${former} ${selectedCountry.name}.`,
         );
       }
     }

@@ -60,12 +60,14 @@ In this application, we have provided a main View (called **PageView** below) an
 | -------- | ----------- |
 | index.html | The application's single HTML page. |
 | style.css | Contains the CSS styling. |
-| App.js | A JavaScript class that implements to the top-level component of the application. |
+| App.js | A JavaScript class that contains the main components of the application. |
 | Model.js | A JavaScript class that implements the Model functionality. |
-| PageView.js | A JavaScript class that implements the View functionality, rendering the Model data as HTML elements in the web page. |
-| ConsoleView.js |  A JavaScript class that implements a (passive) View. It simply logs the Model data to the browser console. |
-| SpeechView.js | A JavaScript class that implements a (passive) View, rendering a summary of the Model data as spoken text. |
+| HeaderView.js | A JavaScript class that implements the View functionality, rendering the header with the select box. |
+| LaureatesView.js | A JavaScript class that implements the View functionality, rendering the laureates details. |
+| ErrorView.js | A JavaScript class that implements the View functionality, rendering an error, if any. |
+| SpeechView.js | A JavaScript class that implements the View functionality, rendering a summary of the Model data as spoken text. |
 | Observable.js | A JavaScript class that implements the Observable component of the [Observer pattern](https://en.wikipedia.org/wiki/Observer_pattern). |
+| Util.js | Contains utility functions. |
 
 ### Example Folders
 
