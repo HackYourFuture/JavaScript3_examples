@@ -1,15 +1,5 @@
 # Object Oriented Programming Examples
 
-## OOP Introduction
-
-Watch Brad Traversy's [JavaScript OOP Crash Course (ES5 & ES6)](https://www.youtube.com/watch?v=vDJpGenyHaA&t=1055s) on YouTube (40 mins). The example files that Brad uses can be found in this repo, folder **week3/7-oop/traversy_oop_crash_course**. To run the code:
-
-1. Open **index-all.html** by right-clicking the file in the VSCode Explorer and select **Open with Live Server**.
-2. Open the Chrome Developer Tools console. 
-3. Select the file to run from the select box.
-
-To examine a particular example in the Chrome Developer Tools, modify **index.html** to load the desired JavaScript file and open **index.html** in the browser.
-
 ## 1. Nobel Prize API
 
 This example builds on the Nobel Prize API example of week 1. Its purpose is to demonstrate the application of Object Oriented Programming, using older-style prototype-based JavaScript objects and the newer ES6 classes.
@@ -75,7 +65,7 @@ Two logically equivalent versions of this application are provided:
 
 | Folder | Description |
 | ------ | ----------- |
-| nobel-prize-prototype | Uses pre-ES6 prototypal inheritance. |
+| nobel-prize-proto | Uses pre-ES6 prototypal inheritance. |
 | nobel-prize-classes | Uses ES6 classes. |
 
 

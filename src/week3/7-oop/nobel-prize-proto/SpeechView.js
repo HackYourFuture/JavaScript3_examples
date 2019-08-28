@@ -1,9 +1,7 @@
 'use strict';
 
 {
-  function SpeechView(model, lang) {
-    model.subscribe(this);
-    this.count = 0;
+  function SpeechView(lang) {
     this.lang = lang;
     this.utterance = null;
     this.voices = null;
@@ -24,7 +22,7 @@
       this.speak(
         `There ${chunks[0]} ${laureates.length} laureate${
           chunks[1]
-        } in ${former} ${selectedCountry.name}.`,
+        } born in ${former} ${selectedCountry.name}.`,
       );
     }
   };
