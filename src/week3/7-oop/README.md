@@ -33,7 +33,7 @@ class Model extends Observable {
   ...
 }
 
-class View {
+class View /* implements IObserver */ {
   ...
   // Implement the update method
   update() {
