@@ -29,18 +29,18 @@
     return elem;
   }
 
-  const countryCode = 'TR';
-  const url = `${BASE_URL}/laureate.json?bornCountryCode=${countryCode}`;
-
   function main() {
+    const root = document.getElementById('root');
+    const ul = createAndAppend('ul', root);
+
+    const countryCode = 'TR';
+    const url = `${BASE_URL}/laureate.json?bornCountryCode=${countryCode}`;
+
     fetchJSON(url, (err, data) => {
       if (err) {
         console.error(err.message); // TODO: render errors to the page
         return; // exit early in case of errors
       }
-      const root = document.getElementById('root');
-
-      const ul = createAndAppend('ul', root);
 
       data.laureates.forEach(laureate => {
         const li = createAndAppend('li', ul);

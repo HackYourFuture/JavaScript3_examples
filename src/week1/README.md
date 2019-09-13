@@ -61,7 +61,8 @@ Note the URL field: we will be using similar URLs in the code examples to fetch 
 | 6‑render-ul  | Use DOM manipulation to create a `<ul>` element and populate it with `<li>` elements using laureate data obtained from the Nobel Prize API. |
 | 7‑dry        | Apply the DRY principle by creating the `createAndAppend()`function to reduce repetitive code. |
 | 8‑dryer      | Enhance `createAndAppend()` to take an optional text parameter. |
-| 9‑select     | Get country info from the API and render in a `<select>` element. |
-| 10‑select-dryer | Finalize createAndAppend functionality. |
-| 11-combine   | Combine `<select>` element with laureates data. |
-| 12‑final     | Render laureate details and add CSS styling. |
+| 9-input      | Add `<input>` element for country code. |
+| 10-dryest    | Finalize createAndAppend functionality. |
+| 11-select    | Get country info from the API and render in a `<select>` element. |
+| 12-combine   | Combine `<select>` element with laureates data. |
+| 13‑final     | Render laureate details and add CSS styling. |

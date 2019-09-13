@@ -1,17 +1,16 @@
 /*
-  Use DOM manipulation to create a <select> element and populate it with
-  <option> elements using country data obtained from the Nobel Prize API.
+  Enhance createAndAppend() to take optional text and attributes parameters
 */
 
 'use strict';
 
 {
-  const API_BASE_URL = 'http://api.nobelprize.org/v1';
+  const BASE_URL = 'http://api.nobelprize.org/v1';
 
   function fetchJSON(url, cb) {
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', url);
     xhr.responseType = 'json';
+    xhr.open('GET', url);
     xhr.onload = () => {
       if (xhr.status >= 200 && xhr.status <= 299) {
         cb(null, xhr.response);
@@ -36,31 +35,30 @@
     return elem;
   }
 
-  function main() {
-    fetchJSON(`${API_BASE_URL}/country.json`, (err, data) => {
+  function onClick(countryCode, ul) {
+    ul.innerHTML = '';
+
+    const url = `${BASE_URL}/laureate.json?bornCountryCode=${countryCode}`;
+
+    fetchJSON(url, (err, data) => {
       if (err) {
         console.error(err.message); // TODO: render errors to the page
-        return;
+        return; // exit early in case of errors
       }
-
-      const root = document.getElementById('root');
-      const select = createAndAppend('select', root);
-
-      data.countries
-        .filter(country => country.code !== undefined)
-        .forEach(country => {
-          createAndAppend('option', select, {
-            value: country.code,
-            text: country.name,
-          });
+      data.laureates.forEach(laureate => {
+        createAndAppend('li', ul, {
+          text: `${laureate.firstname} ${laureate.surname}`,
         });
-
-      const p = createAndAppend('p', root);
-
-      select.addEventListener('change', () => {
-        p.textContent = select.value;
       });
     });
+  }
+
+  function main() {
+    const root = document.getElementById('root');
+    const input = createAndAppend('input', root, { type: 'text' });
+    const button = createAndAppend('button', root, { text: 'GO' });
+    const ul = createAndAppend('ul', root);
+    button.addEventListener('click', () => onClick(input.value, ul));
   }
 
   window.onload = main;

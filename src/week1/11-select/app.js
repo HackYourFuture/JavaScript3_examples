@@ -36,37 +36,15 @@
     return elem;
   }
 
-  function onChangeSelect(countryCode, ul) {
-    const url = `${API_BASE_URL}/laureate.json?bornCountryCode=${countryCode}`;
-    fetchJSON(url, (err, data) => {
-      if (err) {
-        console.error(err.message); // TODO: render errors to the page
-        return; // exit early in case of errors
-      }
-      ul.innerHTML = '';
-
-      data.laureates.forEach(laureate => {
-        const li = createAndAppend('li', ul);
-        li.textContent = `${laureate.firstname} ${laureate.surname}`;
-      });
-    });
-  }
-
   function main() {
+    const root = document.getElementById('root');
+
     fetchJSON(`${API_BASE_URL}/country.json`, (err, data) => {
       if (err) {
         console.error(err.message); // TODO: render errors to the page
         return;
       }
-
-      const root = document.getElementById('root');
       const select = createAndAppend('select', root);
-
-      createAndAppend('option', select, {
-        text: 'Select a country',
-        disabled: 'disabled',
-        selected: 'selected',
-      });
 
       data.countries
         .filter(country => country.code !== undefined)
@@ -77,9 +55,11 @@
           });
         });
 
-      const ul = createAndAppend('ul', root);
+      const p = createAndAppend('p', root);
 
-      select.addEventListener('change', () => onChangeSelect(select.value, ul));
+      select.addEventListener('change', () => {
+        p.textContent = select.value;
+      });
     });
   }
 

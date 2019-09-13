@@ -31,11 +31,9 @@
     return elem;
   }
 
-  function main() {
-    const root = document.getElementById('root');
-    const ul = createAndAppend('ul', root);
+  function onClick(countryCode, ul) {
+    ul.innerHTML = '';
 
-    const countryCode = 'TR';
     const url = `${BASE_URL}/laureate.json?bornCountryCode=${countryCode}`;
 
     fetchJSON(url, (err, data) => {
@@ -47,6 +45,15 @@
         createAndAppend('li', ul, `${laureate.firstname} ${laureate.surname}`);
       });
     });
+  }
+
+  function main() {
+    const root = document.getElementById('root');
+    const input = createAndAppend('input', root);
+    input.setAttribute('type', 'text');
+    const button = createAndAppend('button', root, 'GO');
+    const ul = createAndAppend('ul', root);
+    button.addEventListener('click', () => onClick(input.value, ul));
   }
 
   window.onload = main;
