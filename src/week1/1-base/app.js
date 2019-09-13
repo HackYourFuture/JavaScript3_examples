@@ -6,7 +6,10 @@
 
 {
   const xhr = new XMLHttpRequest();
-  xhr.open('GET', 'http://api.nobelprize.org/v1/country.json');
+  xhr.open(
+    'GET',
+    `http://api.nobelprize.org/v1/laureate.json?bornCountryCode=TR`,
+  );
   xhr.onload = () => {
     console.log(xhr.response);
   };

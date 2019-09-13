@@ -1,6 +1,5 @@
 /*
-  Apply the DRY principle by creating the createAndAppend() function to reduce
-  repetitive code.
+  Render API data as JSON to the page in an unordered list
 */
 
 'use strict';
@@ -23,12 +22,6 @@
     xhr.send();
   }
 
-  function createAndAppend(name, parent) {
-    const elem = document.createElement(name);
-    parent.appendChild(elem);
-    return elem;
-  }
-
   const countryCode = 'TR';
   const url = `${BASE_URL}/laureate.json?bornCountryCode=${countryCode}`;
 
@@ -39,12 +32,13 @@
         return; // exit early in case of errors
       }
       const root = document.getElementById('root');
-
-      const ul = createAndAppend('ul', root);
+      const ul = document.createElement('ul');
+      root.appendChild(ul);
 
       data.laureates.forEach(laureate => {
-        const li = createAndAppend('li', ul);
+        const li = document.createElement('li');
         li.textContent = `${laureate.firstname} ${laureate.surname}`;
+        ul.appendChild(li);
       });
     });
   }

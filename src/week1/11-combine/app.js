@@ -1,5 +1,6 @@
 /*
-  Fetch and render laureates for the selected country.
+  Use DOM manipulation to create a <select> element and populate it with
+  <option> elements using country data obtained from the Nobel Prize API.
 */
 
 'use strict';
@@ -25,8 +26,7 @@
   function createAndAppend(name, parent, options = {}) {
     const elem = document.createElement(name);
     parent.appendChild(elem);
-    Object.keys(options).forEach(key => {
-      const value = options[key];
+    Object.entries(options).forEach(([key, value]) => {
       if (key === 'text') {
         elem.textContent = value;
       } else {
@@ -36,31 +36,31 @@
     return elem;
   }
 
-  function onChangeSelect(country, listContainer) {
-    listContainer.innerHTML = '';
-
-    fetchJSON(`${API_BASE_URL}/laureate.json?bornCountry=${country}`, (err, data) => {
+  function onChangeSelect(countryCode, ul) {
+    const url = `${API_BASE_URL}/laureate.json?bornCountryCode=${countryCode}`;
+    fetchJSON(url, (err, data) => {
       if (err) {
-        const root = document.getElementById('root');
-        createAndAppend('div', root, { text: err.message });
-        return;
+        console.error(err.message); // TODO: render errors to the page
+        return; // exit early in case of errors
       }
+      ul.innerHTML = '';
+
       data.laureates.forEach(laureate => {
-        createAndAppend('li', listContainer, { text: `${laureate.firstname} ${laureate.surname}` });
+        const li = createAndAppend('li', ul);
+        li.textContent = `${laureate.firstname} ${laureate.surname}`;
       });
     });
   }
 
   function main() {
-    const root = document.getElementById('root');
-    const select = createAndAppend('select', root);
-    const listContainer = createAndAppend('ul', root);
-
     fetchJSON(`${API_BASE_URL}/country.json`, (err, data) => {
       if (err) {
-        createAndAppend('div', root, { text: err.message });
+        console.error(err.message); // TODO: render errors to the page
         return;
       }
+
+      const root = document.getElementById('root');
+      const select = createAndAppend('select', root);
 
       createAndAppend('option', select, {
         text: 'Select a country',
@@ -68,18 +68,18 @@
         selected: 'selected',
       });
 
-      const countries = data.countries.sort((a, b) => a.name.localeCompare(b.name));
-      countries.forEach((country, index) => {
-        createAndAppend('option', select, {
-          text: country.name,
-          value: index,
+      data.countries
+        .filter(country => country.code !== undefined)
+        .forEach(country => {
+          createAndAppend('option', select, {
+            value: country.code,
+            text: country.name,
+          });
         });
-      });
 
-      select.addEventListener('change', () => {
-        const country = data.countries[select.value].name;
-        onChangeSelect(country, listContainer);
-      });
+      const ul = createAndAppend('ul', root);
+
+      select.addEventListener('change', () => onChangeSelect(select.value, ul));
     });
   }
 

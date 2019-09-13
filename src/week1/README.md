@@ -53,14 +53,15 @@ Note the URL field: we will be using similar URLs in the code examples to fetch 
 <!-- prettier-ignore -->
 | Folder       | Description |
 | ------------ | ----------- |
-| 1‑base       | A bare bones example using XMLHTTPRequest. |
+| 1‑base       | A bare bones example using XMLHttpPRequest. |
 | 2‑function   | Extracts reusable code into a function that takes a URL and a callback parameter. |
 | 3‑json       | Sets the response type from default (text) to json. |
 | 4‑errors     | Add error handling using a node-style callback. |
-| 5‑render     | Render API data as JSON to the page using a `<pre>` tag. |
-| 6‑select     | Use DOM manipulation to create a `<select>` element and populate it with `<option>` elements using country data obtained from the Nobel Prize API. |
+| 5‑render-pre | Render API data as JSON to the page using a `<pre>` tag. |
+| 6‑render-ul  | Use DOM manipulation to create a `<ul>` element and populate it with `<li>` elements using laureate data obtained from the Nobel Prize API. |
 | 7‑dry        | Apply the DRY principle by creating the `createAndAppend()`function to reduce repetitive code. |
-| 8‑dryer      | Enhance `createAndAppend()` to take optional text and attributes parameters. |
-| 9‑dryest     | Refine the `createAndAppend()` function signature (i.e. the parameter list). |
-| 10‑laureates | Fetch and render laureates for the selected country. |
-| 11‑final     | Render laureate details and add CSS styling. |
+| 8‑dryer      | Enhance `createAndAppend()` to take an optional text parameter. |
+| 9‑select     | Get country info from the API and render in a `<select>` element. |
+| 10‑select-dryer | Finalize createAndAppend functionality. |
+| 11-combine   | Combine `<select>` element with laureates data. |
+| 12‑final     | Render laureate details and add CSS styling. |

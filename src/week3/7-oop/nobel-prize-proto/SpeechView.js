@@ -17,12 +17,11 @@
       return;
     }
     if (laureates != null) {
-      const former = /\bnow\b/.test(selectedCountry.name) ? 'former' : '';
       const chunks = laureates.length === 1 ? ['is', ''] : ['are', 's'];
       this.speak(
-        `There ${chunks[0]} ${laureates.length} laureate${
-          chunks[1]
-        } born in ${former} ${selectedCountry.name}.`,
+        `There ${chunks[0]} ${laureates.length} laureate${chunks[1]} born in ${
+          selectedCountry.name
+        }.`
       );
     }
   };

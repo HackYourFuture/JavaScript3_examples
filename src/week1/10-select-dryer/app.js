@@ -1,7 +1,6 @@
 /*
-  1. Refine the createAndAppend() function signature (i.e. the parameter list).
-  2. Add disabled <option>, selected by default
-  3. Render errors to the page
+  Use DOM manipulation to create a <select> element and populate it with
+  <option> elements using country data obtained from the Nobel Prize API.
 */
 
 'use strict';
@@ -27,8 +26,7 @@
   function createAndAppend(name, parent, options = {}) {
     const elem = document.createElement(name);
     parent.appendChild(elem);
-    Object.keys(options).forEach(key => {
-      const value = options[key];
+    Object.entries(options).forEach(([key, value]) => {
       if (key === 'text') {
         elem.textContent = value;
       } else {
@@ -39,34 +37,28 @@
   }
 
   function main() {
-    const root = document.getElementById('root');
-
     fetchJSON(`${API_BASE_URL}/country.json`, (err, data) => {
       if (err) {
-        createAndAppend('div', root, { text: err.message });
+        console.error(err.message); // TODO: render errors to the page
         return;
       }
 
+      const root = document.getElementById('root');
       const select = createAndAppend('select', root);
-      createAndAppend('option', select, {
-        text: 'Select a country',
-        disabled: 'disabled',
-        selected: 'selected',
-      });
 
-      const countries = data.countries.sort((a, b) => a.name.localeCompare(b.name));
-      countries.forEach((country, index) => {
-        createAndAppend('option', select, {
-          text: country.name,
-          value: index,
+      data.countries
+        .filter(country => country.code !== undefined)
+        .forEach(country => {
+          createAndAppend('option', select, {
+            value: country.code,
+            text: country.name,
+          });
         });
-      });
 
       const p = createAndAppend('p', root);
 
       select.addEventListener('change', () => {
-        const country = data.countries[select.value].name;
-        p.textContent = country;
+        p.textContent = select.value;
       });
     });
   }

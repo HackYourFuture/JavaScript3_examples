@@ -25,8 +25,7 @@
   function createAndAppend(name, parent, options = {}) {
     const elem = document.createElement(name);
     parent.appendChild(elem);
-    Object.keys(options).forEach(key => {
-      const value = options[key];
+    Object.entries(options).forEach(([key, value]) => {
       if (key === 'text') {
         elem.textContent = value;
       } else {
@@ -36,17 +35,14 @@
     return elem;
   }
 
-  function clearContainer(container) {
-    while (container.firstChild) {
-      container.removeChild(container.firstChild);
-    }
-  }
-
   function renderError(err) {
     const listContainer = document.getElementById('list-container');
-    clearContainer(listContainer);
+    listContainer.innerHTML = '';
     const root = document.getElementById('root');
-    createAndAppend('div', root, { text: err.message, class: 'alert alert-error' });
+    createAndAppend('div', root, {
+      text: err.message,
+      class: 'alert alert-error',
+    });
   }
 
   function addRow(tbody, label, value) {
@@ -64,7 +60,10 @@
       const li = createAndAppend('li', ul);
       createAndAppend('span', li, { text: `${prize.year}, ${prize.category}` });
       if (prize.motivation) {
-        createAndAppend('span', li, { text: `: ${prize.motivation}`, class: 'motivation' });
+        createAndAppend('span', li, {
+          text: `: ${prize.motivation}`,
+          class: 'motivation',
+        });
       }
     });
   }
@@ -78,31 +77,42 @@
       const table = createAndAppend('table', div);
       const tbody = createAndAppend('tbody', table);
       addRow(tbody, 'Name', `${firstname} ${surname || ''} `);
-      addRow(tbody, 'Born', `${laureate.born}, ${laureate.bornCity}, ${laureate.bornCountry}`);
+      addRow(
+        tbody,
+        'Born',
+        `${laureate.born}, ${laureate.bornCity}, ${laureate.bornCountry}`,
+      );
       if (laureate.died !== '0000-00-00') {
-        addRow(tbody, 'Died', `${laureate.died}, ${laureate.diedCity}, ${laureate.diedCountry}`);
+        addRow(
+          tbody,
+          'Died',
+          `${laureate.died}, ${laureate.diedCity}, ${laureate.diedCountry}`,
+        );
       }
       renderLaureatePrizes(tbody, laureate.prizes);
     });
   }
 
-  function onChangeSelect(country, listContainer) {
-    clearContainer(listContainer);
+  function onChangeSelect(countryCode, ul) {
+    ul.innerHTML = '';
 
-    fetchJSON(`${API_BASE_URL}/laureate.json?bornCountry=${country}`, (err, data) => {
-      if (err) {
-        renderError(err);
-        return;
-      }
-      renderLaureates(data.laureates, listContainer);
-    });
+    fetchJSON(
+      `${API_BASE_URL}/laureate.json?bornCountryCode=${countryCode}`,
+      (err, data) => {
+        if (err) {
+          renderError(err);
+          return;
+        }
+        renderLaureates(data.laureates, ul);
+      },
+    );
   }
 
   function main() {
     const root = document.getElementById('root');
     createAndAppend('h1', root, { text: 'Nobel Prize Laureates' });
     const header = createAndAppend('header', root);
-    const listContainer = createAndAppend('ul', root, { id: 'list-container' });
+    const ul = createAndAppend('ul', root, { id: 'list-container' });
 
     const select = createAndAppend('select', header);
     createAndAppend('option', select, {
@@ -118,17 +128,17 @@
       }
 
       data.countries
+        .filter(country => country.code !== undefined)
         .sort((a, b) => a.name.localeCompare(b.name))
-        .forEach((country, index) => {
+        .forEach(country => {
           createAndAppend('option', select, {
             text: country.name,
-            value: index,
+            value: country.code,
           });
         });
 
       select.addEventListener('change', () => {
-        const { name } = data.countries[select.value];
-        onChangeSelect(name, listContainer);
+        onChangeSelect(select.value, ul);
       });
     });
   }

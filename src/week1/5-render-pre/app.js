@@ -1,6 +1,5 @@
 /*
   Render API data as JSON to the page using a <pre> tag.
-  - Introduce global constant APE_BASE_URL
   - Exit early in case of error (guard code)
   - Defer execution until page is fully loaded: window.onload
 */
@@ -8,12 +7,12 @@
 'use strict';
 
 {
-  const API_BASE_URL = 'http://api.nobelprize.org/v1';
+  const BASE_URL = 'http://api.nobelprize.org/v1';
 
   function fetchJSON(url, cb) {
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', url);
     xhr.responseType = 'json';
+    xhr.open('GET', url);
     xhr.onload = () => {
       if (xhr.status >= 200 && xhr.status <= 299) {
         cb(null, xhr.response);
@@ -25,8 +24,11 @@
     xhr.send();
   }
 
+  const countryCode = 'TR';
+  const url = `${BASE_URL}/laureate.json?bornCountryCode=${countryCode}`;
+
   function main() {
-    fetchJSON(`${API_BASE_URL}/country.json`, (err, data) => {
+    fetchJSON(url, (err, data) => {
       if (err) {
         console.error(err.message); // TODO: render errors to the page
         return; // exit early in case of errors
@@ -34,6 +36,8 @@
       const root = document.getElementById('root');
       const pre = document.createElement('pre');
       root.appendChild(pre);
+      // pre.textContent = data;
+      // pre.textContent = JSON.stringify(data);
       pre.textContent = JSON.stringify(data, null, 2);
     });
   }

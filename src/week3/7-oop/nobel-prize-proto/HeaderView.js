@@ -18,7 +18,7 @@
   HeaderView.prototype.render = function(countries) {
     this.select = createAndAppend('select', this.header);
     this.select.addEventListener('change', () =>
-      this.fetchData(this.select.value),
+      this.fetchData(this.select.value)
     );
 
     createAndAppend('option', this.select, {
@@ -26,11 +26,11 @@
       disabled: 'disabled',
       selected: 'selected',
     });
-    countries.forEach((country, index) =>
+    countries.forEach(country =>
       createAndAppend('option', this.select, {
         text: country.name,
-        value: index,
-      }),
+        value: country.code,
+      })
     );
   };
 

@@ -1,10 +1,13 @@
 /*
   Sets the response type from default (text) to json.
+  Function renamed to fetchJSON
 */
 
 'use strict';
 
 {
+  const BASE_URL = 'http://api.nobelprize.org/v1';
+
   function fetchJSON(url, cb) {
     const xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
@@ -13,7 +16,10 @@
     xhr.send();
   }
 
-  fetchJSON('http://api.nobelprize.org/v1/country.json', data => {
+  const countryCode = 'TR';
+  const url = `${BASE_URL}/laureate.json?bornCountryCode=${countryCode}`;
+
+  fetchJSON(url, data => {
     console.log(data);
   });
 }

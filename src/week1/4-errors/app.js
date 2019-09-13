@@ -1,4 +1,5 @@
 /*
+  Define a constant for the base url.
   Add error handling using a node-style callback.
   Handle:
   1. HTTP errors
@@ -8,6 +9,8 @@
 'use strict';
 
 {
+  const API_BASE_URL = 'http://api.nobelprize.org/v1';
+
   function fetchJSON(url, cb) {
     const xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
@@ -23,7 +26,10 @@
     xhr.send();
   }
 
-  fetchJSON('http://api.nobelprize.org/v1/country.json', (err, data) => {
+  const countryCode = 'TR';
+  const url = `${API_BASE_URL}/laureate.json?bornCountryCode=${countryCode}`;
+
+  fetchJSON(url, (err, data) => {
     if (err) {
       console.error(err.message);
     } else {

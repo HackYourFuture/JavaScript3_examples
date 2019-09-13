@@ -18,21 +18,23 @@
   Model.prototype = Object.create(Observable.prototype);
   Model.prototype.constructor = Model;
 
-  Model.prototype.fetchData = async function(selectedIndex) {
+  Model.prototype.fetchData = async function(countryCode) {
     this.state.error = null;
     try {
       if (this.state.countries.length === 0) {
         const { countries } = await Model.fetchJSON(
-          `${API_BASE_URL}/country.json`,
+          `${API_BASE_URL}/country.json`
         );
-        this.state.countries = countries.sort((a, b) =>
-          a.name.localeCompare(b.name),
-        );
+        this.state.countries = countries
+          .filter(country => !!country.code)
+          .sort((a, b) => a.name.localeCompare(b.name));
       }
-      if (selectedIndex !== undefined) {
-        this.state.selectedCountry = this.state.countries[selectedIndex];
+      if (countryCode !== undefined) {
+        this.state.selectedCountry = this.state.countries.find(
+          country => country.code === countryCode
+        );
         const { laureates } = await Model.fetchJSON(
-          `${API_BASE_URL}/laureate.json?bornCountry=${this.state.selectedCountry.name}`,
+          `${API_BASE_URL}/laureate.json?bornCountryCode=${countryCode}`
         );
         this.state.laureates = laureates;
       }

@@ -23,6 +23,15 @@
     xhr.send();
   }
 
+  function createAndAppend(name, parent, text) {
+    const elem = document.createElement(name);
+    if (text) {
+      elem.textContent = text;
+    }
+    parent.appendChild(elem);
+    return elem;
+  }
+
   function main() {
     fetchJSON(`${API_BASE_URL}/country.json`, (err, data) => {
       if (err) {
@@ -31,22 +40,19 @@
       }
 
       const root = document.getElementById('root');
-      const select = document.createElement('select');
-      root.appendChild(select);
+      const select = createAndAppend('select', root);
 
-      data.countries.forEach((country, index) => {
-        const option = document.createElement('option');
-        option.setAttribute('value', index);
-        option.textContent = country.name;
-        select.appendChild(option);
-      });
+      data.countries
+        .filter(country => country.code !== undefined)
+        .forEach(country => {
+          const option = createAndAppend('option', select, country.name);
+          option.setAttribute('value', country.code);
+        });
 
-      const p = document.createElement('p');
-      root.appendChild(p);
+      const p = createAndAppend('p', root);
 
       select.addEventListener('change', () => {
-        const country = data.countries[select.value].name;
-        p.textContent = country;
+        p.textContent = select.value;
       });
     });
   }
