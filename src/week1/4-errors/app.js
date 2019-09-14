@@ -4,6 +4,7 @@
   Handle:
   1. HTTP errors
   2. Network errors
+  Create an Error object to report errors
 */
 
 'use strict';

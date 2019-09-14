@@ -21,5 +21,6 @@
 
   fetchJSON(url, data => {
     console.log(data);
+    console.log(typeof data);
   });
 }
