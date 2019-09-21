@@ -2,7 +2,7 @@
 
 {
   const INDENT_SPACES = 2;
-  const HR = '-'.repeat(12);
+  const HR = '-'.repeat(40);
 
   window.logger = {
     level: 0,
@@ -16,7 +16,7 @@
       const indentation = ' '.repeat(this.level * INDENT_SPACES);
       console.log(`${indentation}leaving ${name}`);
       if (this.level === 0) {
-        console.log(`${HR}WAITING${HR}`);
+        console.log(HR);
       }
     },
   };

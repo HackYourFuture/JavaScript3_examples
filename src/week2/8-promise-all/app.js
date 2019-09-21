@@ -33,9 +33,14 @@
     fetchJSON(url)
       .then(data => {
         const prizes = data.prizes;
-        const laureates = prizes.reduce((acc, prize) => acc.concat(prize.laureates), []);
+        const laureates = prizes.reduce((acc, prize) => {
+          if (prize.laureates) {
+            acc = acc.concat(prize.laureates);
+          }
+          return acc;
+        }, []);
         const promises = laureates.map(laureate =>
-          fetchJSON(`${API_BASE_URL}/laureate.json?id=${laureate.id}`),
+          fetchJSON(`${API_BASE_URL}/laureate.json?id=${laureate.id}`)
         );
         return Promise.all(promises);
       })
@@ -59,6 +64,6 @@
     }, 200);
   }
 
-  const NOBEL_PRIZE_API_END_POINT = `${API_BASE_URL}/prize.json?category=literature&numberOfLaureates=2`;
+  const NOBEL_PRIZE_API_END_POINT = `${API_BASE_URL}/prize.json?year=2000&yearTo=2019&category=literature`;
   window.onload = () => main(NOBEL_PRIZE_API_END_POINT);
 }
