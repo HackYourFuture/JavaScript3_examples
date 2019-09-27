@@ -27,9 +27,13 @@
         id: 'list-container',
       });
       laureates.forEach(laureate => {
+        const prizeYears = laureate.prizes
+          .reduce((acc, prize) => acc.concat(prize.year), [])
+          .join(', ');
         View.createAndAppend('li', ul, {
           class: 'list-item',
-          text: `${laureate.firstname} ${laureate.surname || ''}`,
+          text: `${laureate.firstname} ${laureate.surname ||
+            ''} (${prizeYears})`,
         });
       });
     }

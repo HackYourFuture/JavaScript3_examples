@@ -19,14 +19,13 @@
     }
 
     async fetchData() {
-      const newState = { ...this.state, error: null };
+      this.state.error = null;
       try {
         const { laureates } = await Model.fetchJSON(API_URL);
-        newState.laureates = laureates;
+        this.state.laureates = laureates;
       } catch (err) {
-        newState.error = err;
+        this.state.error = err;
       }
-      this.state = newState;
       this.notify(this.state);
     }
 
