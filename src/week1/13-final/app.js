@@ -1,12 +1,13 @@
-/*
-  Render laureate details and add CSS styling.
-*/
-
 'use strict';
 
 {
   const API_BASE_URL = 'http://api.nobelprize.org/v1';
 
+  /**
+   *
+   * @param {string} url
+   * @param {(err: Error, data: any) => void} cb
+   */
   function fetchJSON(url, cb) {
     const xhr = new XMLHttpRequest();
     xhr.open('GET', url);
@@ -22,6 +23,12 @@
     xhr.send();
   }
 
+  /**
+   *
+   * @param {string} name
+   * @param {HTMLElement} parent
+   * @param {{[key: string]: string}} options
+   */
   function createAndAppend(name, parent, options = {}) {
     const elem = document.createElement(name);
     parent.appendChild(elem);
@@ -35,6 +42,10 @@
     return elem;
   }
 
+  /**
+   *
+   * @param {Error} err
+   */
   function renderError(err) {
     const listContainer = document.getElementById('list-container');
     listContainer.innerHTML = '';
@@ -45,12 +56,23 @@
     });
   }
 
+  /**
+   *
+   * @param {HTMLElement} tbody
+   * @param {string} label
+   * @param {string} value
+   */
   function addRow(tbody, label, value) {
     const tr = createAndAppend('tr', tbody);
     createAndAppend('td', tr, { text: `${label}:`, class: 'label' });
     createAndAppend('td', tr, { text: value });
   }
 
+  /**
+   *
+   * @param {HTMLElement} tbody
+   * @param {any[]} prizes
+   */
   function renderLaureatePrizes(tbody, prizes) {
     const tr = createAndAppend('tr', tbody);
     createAndAppend('td', tr, { text: 'Prizes:', class: 'label' });
@@ -68,6 +90,11 @@
     });
   }
 
+  /**
+   *
+   * @param {any[]} laureates
+   * @param {HTMLElement} listContainer
+   */
   function renderLaureates(laureates, listContainer) {
     laureates.forEach(laureate => {
       const { surname, firstname } = laureate;
@@ -80,19 +107,24 @@
       addRow(
         tbody,
         'Born',
-        `${laureate.born}, ${laureate.bornCity}, ${laureate.bornCountry}`,
+        `${laureate.born}, ${laureate.bornCity}, ${laureate.bornCountry}`
       );
       if (laureate.died !== '0000-00-00') {
         addRow(
           tbody,
           'Died',
-          `${laureate.died}, ${laureate.diedCity}, ${laureate.diedCountry}`,
+          `${laureate.died}, ${laureate.diedCity}, ${laureate.diedCountry}`
         );
       }
       renderLaureatePrizes(tbody, laureate.prizes);
     });
   }
 
+  /**
+   *
+   * @param {string} countryCode
+   * @param {HTMLElement} ul
+   */
   function onChangeSelect(countryCode, ul) {
     ul.innerHTML = '';
 
@@ -104,7 +136,7 @@
           return;
         }
         renderLaureates(data.laureates, ul);
-      },
+      }
     );
   }
 
@@ -114,7 +146,11 @@
     const header = createAndAppend('header', root);
     const ul = createAndAppend('ul', root, { id: 'list-container' });
 
-    const select = createAndAppend('select', header);
+    /* prettier-ignore */
+    const select = /**@type HTMLSelectElement*/ (createAndAppend(
+      'select',
+      header
+    ));
     createAndAppend('option', select, {
       text: 'Select a country',
       disabled: 'disabled',
@@ -127,7 +163,10 @@
         return;
       }
 
-      data.countries
+      /**@type {{code: string, name: string}[]} */
+      const countries = data.countries;
+
+      countries
         .filter(country => country.code !== undefined)
         .sort((a, b) => a.name.localeCompare(b.name))
         .forEach(country => {

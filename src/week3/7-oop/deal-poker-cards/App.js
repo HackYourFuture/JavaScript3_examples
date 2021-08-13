@@ -1,14 +1,11 @@
-'use strict';
+import CardDeck from './CardDeck.js';
+import CardGame from './CardGame.js';
 
-{
-  const { CardDeck, CardGame } = window;
-
-  class App {
-    constructor() {
-      const cardDeck = new CardDeck();
-      this.game = new CardGame(cardDeck);
-    }
+class App {
+  constructor() {
+    const cardDeck = new CardDeck();
+    this.game = new CardGame(cardDeck);
   }
-
-  window.onload = () => new App();
 }
+
+window.onload = () => new App();
